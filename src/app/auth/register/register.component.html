@@ -1,0 +1,126 @@
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url(./assets/images/background/login-register.jpg);">
+            <div class="login-box card">
+                <div class="card-body">
+
+                    <form class="form-horizontal form-material"
+                    [formGroup]="registerForm" (ngSubmit)="save($event)">
+                        <h3 class="box-title m-b-20">Sign Up</h3>
+
+                        
+                            <h4>Completa tus datos:</h4>
+                            <div class="row">
+                            <div class="form-group col-6">
+                                    <input class="form-control"
+                                    onkeydown="return /[a-zA-ZñÑá-úÁ-Ú ]/i.test(event.key)"
+                                    type="text" formControlName="nombre" placeholder="Nombre">
+                                <div *ngIf="nombreFieldIsInvalid" class="text-danger">
+                                    El campo es requerido
+                                  </div>
+                            </div>
+    
+                            <div class="form-group col-6">
+                                    <input class="form-control"
+                                    onkeydown="return /[a-zA-ZñÑá-úÁ-Ú ]/i.test(event.key)"
+                                    type="text" formControlName="apellido" placeholder="Apellido">
+                                <div *ngIf="apellidoFieldIsInvalid" class="text-danger">
+                                    El campo es requerido
+                                  </div>
+                            </div>
+                            <div class="form-group col-6">
+                                    <input class="form-control" type="email" formControlName="correo" placeholder="Correo">
+                                <div *ngIf="emailFieldIsInvalid" class="text-danger">
+                                    <p *ngIf="emailField.hasError('required')">El campo es requerido</p>
+                                    <p *ngIf="emailField.hasError('email')">El correo no es valido</p>
+                                    <p *ngIf="emailField.hasError('notAvailable')">Este correo no esta disponible</p>
+                                  </div>
+                            </div>
+                            <div class="form-group col-6">
+                                    <input class="form-control" type="password" formControlName="clave" placeholder="Contraseña">
+                                <div *ngIf="claveFieldIsValid" class="text-success">
+                                    Contraseña segura!
+                                  </div>
+                                  <div *ngIf="claveFieldIsInvalid" class="text-danger">
+                                    <p *ngIf="claveField.hasError('required')">El campo es requerido</p>
+                                    <p *ngIf="claveField.hasError('minlength')">La contraseña debe tener al menos 8 caracteres</p>
+                                    <p *ngIf="claveField.hasError('pattern')">La contraseña debe tener minusculas, mayusculas, numeros y un caracter especial</p>
+                                  </div>
+                            </div>
+                            <div class="form-group col-6">
+                                    <input class="form-control" type="text" formControlName="dni" placeholder="DNI">
+                                <div *ngIf="dniFieldIsInvalid" class="text-danger">
+                                    <p *ngIf="dniField.hasError('required')">El campo es requerido</p>
+                                    <p *ngIf="dniField.hasError('minlength')">El dni no es correcto(debe tener 8 digitos)</p>
+                                    <p *ngIf="dniField.hasError('maxlength')">El dni no es correcto(debe tener 8 digitos)</p>
+                                    <p *ngIf="dniField.hasError('pattern')">Este campo solo acepta numeros</p>
+                                  </div>
+                            </div>
+                            <div class="form-group col-6">
+                                    <input class="form-control" type="text" formControlName="telefono" placeholder="Telefono">
+                                <div *ngIf="telefonoFieldIsInvalid" class="text-danger">
+                                    <p *ngIf="telefonoField.hasError('required')">El campo es requerido</p>
+                                    <p *ngIf="telefonoField.hasError('minlength')">El telefono no es correcto(debe tener 9 digitos)</p>
+                                    <p *ngIf="telefonoField.hasError('maxlength')">El telefono no es correcto(debe tener 9 digitos)</p>
+                                    <p *ngIf="telefonoField.hasError('pattern')">Este campo solo acepta numeros</p>
+                                  </div>
+                            </div>
+                        </div>
+                            
+                                <h4>Sobre la membresia:</h4>
+                                <div class="row">
+                                <div class="form-group col-6">
+                                        <select class="form-control"
+                                        formControlName="membresia">
+                                        <option [ngValue]="undefined">---Seleccionar una membresia ---</option>
+                                        <option *ngFor="let membresia of membresias" [ngValue]="membresia">{{membresia.nombre}}</option>
+                                    </select>
+                                    <div *ngIf="membresiaFieldIsInvalid" class="text-danger">
+                                      Debe seleccionar una membresia
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+
+                                        <select class="form-control"
+                                            formControlName="hora">
+                                            <option [ngValue]="undefined">---Seleccionar un horario ---</option>
+                                            <option *ngFor="let hora of horas" [ngValue]="hora">{{hora.horaInicio}} a {{hora.horaFinal}}</option>
+                                        </select>
+                                    <div *ngIf="horaFieldIsInvalid" class="text-danger">
+                                        Debe seleccionar un horario
+                                    </div>
+                                </div>
+                            </div>
+                                
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="checkbox checkbox-success p-t-0">
+                                    <input id="checkbox-signup" type="checkbox" formControlName="terminos" class="filled-in chk-col-light-blue">
+                                    <label for="checkbox-signup"> I agree to all <a href="#">Terms</a></label>
+                                </div>
+                                <div *ngIf="terminosFieldIsInvalid" class="text-danger">
+                                    Aceptar los terminos y condiciones
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center p-b-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-12 text-center">
+                                Already have an account? <a routerLink="/login" class="text-info m-l-5"><b>Sign In</b></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->

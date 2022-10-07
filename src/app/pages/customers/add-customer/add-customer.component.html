@@ -1,0 +1,165 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="addCustomerService.modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+                <form [formGroup]="crearForm" (ngSubmit)="save($event)">
+                    <div class="form-body">
+                        <h3 class="card-title">Datos del Cliente</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="nombreFieldIsInvalid"
+                                [class.has-success]="nombreFieldIsValid">
+                                    <label class="control-label">Nombre</label>
+                                    <input type="text" class="form-control" 
+                                    placeholder="Nombre" formControlName="nombre"
+                                    [class.form-control-danger]="nombreFieldIsInvalid"
+                                    [class.form-control-success]="nombreFieldIsValid" 
+                                    onkeydown="return /[a-zA-ZñÑá-úÁ-Ú ]/i.test(event.key)">
+                                    <small *ngIf="nombreFieldIsInvalid" class="form-control-feedback"> El campo es requerido. </small>
+                                    <small *ngIf="nombreFieldIsValid" class="form-control-feedback"> El campo es correcto. </small> 
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group" 
+                                [class.has-danger]="apellidoFieldIsInvalid"
+                                [class.has-success]="apellidoFieldIsValid">
+                                    <label class="control-label">Apellido</label>
+                                    <input type="text" class="form-control"
+                                    [class.form-control-danger]="apellidoFieldIsInvalid"
+                                    [class.form-control-success]="apellidoFieldIsValid" 
+                                    placeholder="Apellido" formControlName="apellido"
+                                    onkeydown="return /[a-zA-ZñÑá-úÁ-Ú ]/i.test(event.key)">
+                                    <small *ngIf="apellidoFieldIsInvalid" class="form-control-feedback"> El campo es requerido. </small>
+                                    <small *ngIf="apellidoFieldIsValid" class="form-control-feedback"> El campo es correcto. </small> 
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="emailFieldIsInvalid"
+                                [class.has-success]="emailFieldIsValid">
+                                    <label class="control-label">Correo</label>
+                                    <input type="text" class="form-control"
+                                    [class.form-control-danger]="emailFieldIsInvalid"
+                                    [class.form-control-success]="emailFieldIsValid" 
+                                    placeholder="Correo" formControlName="correo">
+                                    <small *ngIf="emailFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="emailField.hasError('required')">El campo es requerido</p>
+                                        <p *ngIf="emailField.hasError('email')">El correo no es valido</p>
+                                        <p *ngIf="emailField.hasError('notAvailable')">Este correo no esta disponible</p>
+                                    </small>
+                                    <small *ngIf="emailFieldIsValid" class="form-control-feedback"> El campo es correcto. </small> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="claveFieldIsInvalid"
+                                [class.has-success]="claveFieldIsValid">
+                                    <label class="control-label">Contraseña</label>
+                                    <input type="password" class="form-control"
+                                    [class.form-control-danger]="claveFieldIsInvalid"
+                                    [class.form-control-success]="claveFieldIsValid" 
+                                    placeholder="Contraseña" formControlName="clave">
+                                    <small *ngIf="claveFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="claveField.hasError('required')">El campo es requerido</p>
+                                        <p *ngIf="claveField.hasError('minlength')">La contraseña debe tener al menos 8 caracteres</p>
+                                        <p *ngIf="claveField.hasError('pattern')">La contraseña debe tener minusculas, mayusculas, numeros y un caracter especial</p>
+                                    </small>
+                                    <small *ngIf="claveFieldIsValid" class="form-control-feedback"> La contraseña es segura. </small> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="dniFieldIsInvalid"
+                                [class.has-success]="dniFieldIsValid">
+                                    <label class="control-label">DNI</label>
+                                    <input type="text" class="form-control"
+                                    [class.form-control-danger]="dniFieldIsInvalid"
+                                    [class.form-control-success]="dniFieldIsValid" 
+                                    placeholder="DNI" formControlName="dni">
+                                    <small *ngIf="dniFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="dniField.hasError('required')">El campo es requerido</p>
+                                        <p *ngIf="dniField.hasError('minlength')">El dni no es correcto(debe tener 8 digitos)</p>
+                                        <p *ngIf="dniField.hasError('maxlength')">El dni no es correcto(debe tener 8 digitos)</p>
+                                        <p *ngIf="dniField.hasError('pattern')">Este campo solo acepta numeros</p>
+                                    </small>
+                                    <small *ngIf="dniFieldIsValid" class="form-control-feedback"> El campo es correcto. </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="telefonoFieldIsInvalid"
+                                [class.has-success]="telefonoFieldIsValid">
+                                    <label class="control-label">Telefono</label>
+                                    <input type="text" class="form-control"
+                                    [class.form-control-danger]="telefonoFieldIsInvalid"
+                                    [class.form-control-success]="telefonoFieldIsValid" 
+                                    placeholder="Telefono" formControlName="telefono">
+                                    <small *ngIf="telefonoFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="telefonoField.hasError('required')">El campo es requerido</p>
+                                        <p *ngIf="telefonoField.hasError('minlength')">El telefono no es correcto(debe tener 9 digitos)</p>
+                                        <p *ngIf="telefonoField.hasError('maxlength')">El telefono no es correcto(debe tener 9 digitos)</p>
+                                        <p *ngIf="telefonoField.hasError('pattern')">Este campo solo acepta numeros</p>
+                                    </small>
+                                    <small *ngIf="telefonoFieldIsValid" class="form-control-feedback"> El campo es correcto. </small>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/row-->
+                        <h3 class="box-title m-t-40">Sobre la Membresia</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="membresiaFieldIsInvalid"
+                                [class.has-success]="membresiaFieldIsValid">
+                                    <label class="control-label">Membresia</label>
+                                    <select class="form-control custom-select" formControlName="membresia" data-placeholder="--Seleccionar un horario--" tabindex="1">
+                                        <option [ngValue]="undefined">---Seleccionar una membresia ---</option>
+                                        <option *ngFor="let membresia of membresias" [ngValue]="membresia">{{membresia.nombre}}</option>
+                                    </select>
+                                    <small *ngIf="membresiaFieldIsInvalid" class="form-control-feedback">Campo requerido</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="horaFieldIsInvalid"
+                                [class.has-success]="horaFieldIsValid">
+                                    <label class="control-label">Horario</label>
+                                    <select class="form-control custom-select" formControlName="hora">
+                                        <option [ngValue]="undefined">---Seleccionar un horario ---</option>
+                                        <option *ngFor="let hora of horas" [ngValue]="hora">{{hora.horaInicio}} a {{hora.horaFinal}}</option>
+                                    </select>
+                                    <small *ngIf="horaFieldIsInvalid" class="form-control-feedback">Campo requerido</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions pull-right">
+                        <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i> Registrar</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

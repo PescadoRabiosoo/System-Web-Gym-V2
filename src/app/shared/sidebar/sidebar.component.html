@@ -1,0 +1,56 @@
+ <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="user-profile">
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                                <img *ngIf="usuarioLogeado?.foto" src="http://localhost:8080/gym/uploads/imgcliente/{{usuarioLogeado.foto}}" alt="{{usuarioLogeado.foto}}"/>
+                                <img *ngIf="!usuarioLogeado?.foto" src="http://localhost:8080/images/productos/notuser.png" alt="sin foto"/>
+                                <span class="hide-menu">{{usuarioLogeado.nombre}} {{usuarioLogeado.apellido}} </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a routerLink="/admin">Mi Perfil </a></li>
+                                <li><a routerLink="/admin/account-settings">Ajustes</a></li>
+                                <li><a style="cursor: pointer;" (click)="logout()">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-devider"></li>
+                        <li class="nav-small-cap">SISTEMA</li>
+
+
+                        <li *ngFor="let item of menuItems"> 
+
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false" *ngIf="item.submenu.length > 0">
+                                <i class="{{item.icono}}"></i>
+                                <span class="hide-menu">{{item.titulo}} 
+                                    <span class="label label-rouded label-themecolor pull-right">{{item.submenu.length}}</span>
+                                </span>
+                            </a>
+
+                            <ul aria-expanded="false" class="collapse" *ngIf="item.submenu.length > 0">
+                                <li *ngFor="let subMenuItem of item.submenu">
+                                    <a [routerLink]="[item.url+'/'+subMenuItem.url]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{subMenuItem.titulo}}</a>
+                                </li>
+                            </ul>
+
+                            <a class="waves-effect waves-dark" href="#" [routerLink]="item.url" *ngIf="item.submenu.length == 0">
+                                
+                                <i class="{{item.icono}}"></i>
+                                <span class="hide-menu">{{item.titulo}} </span>
+                            </a>
+
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->

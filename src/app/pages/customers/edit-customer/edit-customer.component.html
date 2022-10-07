@@ -1,0 +1,81 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="editCustomerService.modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}} {{cliente.nombre}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+                <form [formGroup]="editForm" (ngSubmit)="edit($event)">
+                    <div class="form-body">
+                        <h3 class="card-title">Datos del Cliente</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="nombreFieldIsInvalid"
+                                [class.has-success]="nombreFieldIsValid">
+                                    <label class="control-label">Nombre</label>
+                                    <input type="text" class="form-control"
+                                    placeholder="Nombre" formControlName="nombre"
+                                    [class.form-control-danger]="nombreFieldIsInvalid"
+                                    [class.form-control-success]="nombreFieldIsValid"
+                                    onkeydown="return /[a-zA-ZñÑá-úÁ-Ú ]/i.test(event.key)">
+                                    <small *ngIf="nombreFieldIsInvalid" class="form-control-feedback"> El campo es requerido. </small>
+                                    <small *ngIf="nombreFieldIsValid" class="form-control-feedback"> El campo es correcto. </small> 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" 
+                                [class.has-danger]="apellidoFieldIsInvalid"
+                                [class.has-success]="apellidoFieldIsValid">
+                                    <label class="control-label">Apellido</label>
+                                    <input type="text" class="form-control"
+                                    [class.form-control-danger]="apellidoFieldIsInvalid"
+                                    [class.form-control-success]="apellidoFieldIsValid" 
+                                    placeholder="Apellido" formControlName="apellido"
+                                    onkeydown="return /[a-zA-ZñÑá-úÁ-Ú ]/i.test(event.key)">
+                                    <small *ngIf="apellidoFieldIsInvalid" class="form-control-feedback"> El campo es requerido. </small>
+                                    <small *ngIf="apellidoFieldIsValid" class="form-control-feedback"> El campo es correcto. </small> 
+                                </div>
+                            </div>
+                            <!--/span-->                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group"
+                                [class.has-danger]="telefonoFieldIsInvalid"
+                                [class.has-success]="telefonoFieldIsValid">
+                                    <label class="control-label">Telefono</label>
+                                    <input type="number" class="form-control"
+                                    [class.form-control-danger]="telefonoFieldIsInvalid"
+                                    [class.form-control-success]="telefonoFieldIsValid" 
+                                    placeholder="Telefono" formControlName="telefono">
+                                    <small *ngIf="telefonoFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="telefonoField.hasError('required')">El campo es requerido</p>
+                                        <p *ngIf="telefonoField.hasError('minlength')">El telefono no es correcto(debe tener 9 digitos)</p>
+                                        <p *ngIf="telefonoField.hasError('maxlength')">El telefono no es correcto(debe tener 9 digitos)</p>
+                                        <!--<p *ngIf="telefonoField.hasError('pattern')">Este campo solo acepta numeros</p>-->
+                                    </small>
+                                    <small *ngIf="telefonoFieldIsValid" class="form-control-feedback"> El campo es correcto. </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions pull-right">
+                        <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i> Actualizar</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

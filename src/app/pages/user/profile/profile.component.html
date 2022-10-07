@@ -1,0 +1,72 @@
+<!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <!-- Row -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="m-t-30 text-center"> 
+                                    <img *ngIf="usuarioLogeado?.foto" src="http://localhost:8080/gym/uploads/imgcliente/{{usuarioLogeado.foto}}" alt="{{usuarioLogeado.foto}}" class="img-circle" width="150" />
+                                    <img *ngIf="!usuarioLogeado?.foto" src="http://localhost:8080/images/productos/notuser.png" alt="sin foto" class="img-circle" width="150">
+                                    <h4 class="card-title m-t-10">{{usuarioLogeado.nombre}} {{usuarioLogeado.apellido}}</h4>
+                                    <h6 class="card-subtitle">Administrador</h6>
+                                </div>
+                            </div>
+                            <div>
+                                <hr> </div>
+                            <div class="card-body"> <small class="text-muted">Correo </small>
+                                <h6>{{usuarioLogeado.correo}} </h6> <small class="text-muted p-t-30 db">DNI</small>
+                                <h6>{{usuarioLogeado.dni}} </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">Editar Datos</a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="settings" role="tabpanel">
+                                    <div class="card-body">
+                                        <form class="form-horizontal form-material">
+                                            <div class="form-group">
+                                                <label class="col-md-12">Nombre</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="{{usuarioLogeado.nombre}}" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Apellido</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="{{usuarioLogeado.apellido}}" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Telefono</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" placeholder="{{usuarioLogeado.telefono}}" class="form-control form-control-line">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button class="btn btn-outline-success">Actualizar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- Row -->
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
