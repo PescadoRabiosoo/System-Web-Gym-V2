@@ -48,12 +48,11 @@ export class EditCustomerComponent implements OnInit, OnChanges {
       const value = this.editForm.value as Cliente;
       this.customersService.update(value).subscribe(
         cliente => {
+          this.editCustomerService.notificarUpload.emit(cliente.cliente);
           Swal.fire('Cliente Actualizado', `El cliente ${value.nombre} se ha actualizado correctamente`, `success`)
           this.cerrarModal();
-        }
+        },
       );
-    } else {
-      this.editForm.markAllAsTouched();
     }
   }
 

@@ -1,35 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario.model';
-import { ImgProfileService } from 'src/app/pages/user/profile/img-profile/img-profile.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { NavsideService } from 'src/app/services/navside.service';
 import Swal from 'sweetalert2';
 
-declare function customSidebar(): void;
-
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styles: [
-  ]
+  selector: 'app-navside',
+  templateUrl: './navside.component.html',
+  styleUrls: ['./navside.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class NavsideComponent implements OnInit {
 
+  menuItems?: any[];
   id: number;
   usuarioLogeado: Usuario = new Usuario();
 
-  constructor(private authService: AuthService, public imgProfileService: ImgProfileService, private router: Router) { }
+  constructor(private navsideService: NavsideService,
+    private authService: AuthService,
+    private router: Router) {
+    this.menuItems = navsideService.menu;
+  }
 
   ngOnInit(): void {
-    customSidebar();
     this.id = JSON.parse(sessionStorage.getItem('usuario')).id;
 
     this.authService.obtenerUsuario(this.id).subscribe(response => {
       this.usuarioLogeado = response as Usuario;
-    });
-
-    this.imgProfileService.notificarUpload.subscribe(usuario => {
-      this.usuarioLogeado = usuario;
     });
   }
 

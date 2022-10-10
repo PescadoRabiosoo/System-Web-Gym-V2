@@ -12,6 +12,7 @@ export class Usuario {
     telefono: number;
     createAt: string;
     estado: Boolean;
+    enabled: Boolean;
     foto: string;
     membresia: Membresia;
     hora: HoraDisponible;

@@ -19,6 +19,8 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { FiltroCustomersPipe } from './customers/pipes/filtro-customers.pipe';
 import { AddCustomerComponent } from './customers/add-customer/add-customer.component';
 import { EditCustomerComponent } from './customers/edit-customer/edit-customer.component';
+import { ImgCustomerComponent } from './customers/img-customer/img-customer.component';
+import { ImgProfileComponent } from './user/profile/img-profile/img-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { EditCustomerComponent } from './customers/edit-customer/edit-customer.c
     FiltroCustomersPipe,
     AddCustomerComponent,
     EditCustomerComponent,
+    ImgCustomerComponent,
+    ImgProfileComponent,
   ],
   imports: [
     CommonModule,

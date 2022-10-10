@@ -66,6 +66,7 @@ export class AddCustomerComponent implements OnInit {
       const value = this.crearForm.value as Cliente;
       this.customersService.create(value).subscribe(
         cliente => {
+          this.addCustomerService.notificarUpload.emit(cliente);
           Swal.fire('Nuevo Cliente', `El cliente ${cliente.nombre} se ha registrado correctamente`, `success`)
           this.cerrarModal();
         },

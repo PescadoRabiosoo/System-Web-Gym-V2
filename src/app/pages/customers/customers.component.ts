@@ -6,6 +6,7 @@ import { CustomersService } from 'src/app/services/customers.service';
 import Swal from 'sweetalert2';
 import { AddCustomerService } from './add-customer/add-customer.service';
 import { EditCustomerService } from './edit-customer/edit-customer.service';
+import { ImgCustomerService } from './img-customer/img-customer.service';
 
 @Component({
   selector: 'app-customers',
@@ -22,48 +23,117 @@ export class CustomersComponent implements OnInit {
   pages: number = 0;
 
   constructor(private customersService: CustomersService,
-    private activatedRoute: ActivatedRoute,
     public authService: AuthService,
     public addCustomerService: AddCustomerService,
-    public editCustomerService: EditCustomerService) { }
+    public editCustomerService: EditCustomerService,
+    public imgCustomerService: ImgCustomerService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
-      let page: number = +params.get('page');
+    this.customersService.getClientesAll()
+      .subscribe(
+        clientes => {
+          this.clientes = clientes
+        });
 
-      if (!page) {
-        page = 0;
-      }
-
-      this.customersService.getClientesAll()
-        .subscribe(
-          clientes => {
-            this.clientes = clientes
-          }
-        )
-    });
 
     this.addCustomerService.notificarUpload.subscribe(cliente => {
-
-      this.clientes = this.clientes.map(clienteOriginal => {
-        if (cliente.id == clienteOriginal.id) {
-          clienteOriginal.foto = cliente.foto;
-        }
-        console.log(clienteOriginal)
-        return clienteOriginal;
-      });
+      this.clientes.push(cliente);
     });
 
     this.editCustomerService.notificarUpload.subscribe(cliente => {
+      this.clientes = this.clientes.map(clienteOriginal => {
+        if (cliente.id == clienteOriginal.id) {
+          clienteOriginal = cliente;
+        }
+        return clienteOriginal;
+      });
+    });
 
+    this.imgCustomerService.notificarUpload.subscribe(cliente => {
       this.clientes = this.clientes.map(clienteOriginal => {
         if (cliente.id == clienteOriginal.id) {
           clienteOriginal.foto = cliente.foto;
         }
-        console.log(clienteOriginal)
         return clienteOriginal;
       });
     });
+  }
+
+  disabled(cliente: Cliente) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-outline-primary',
+        cancelButton: 'btn btn-outline-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Esta seguro?',
+      text: `¿Seguro que desea deshabilitar al cliente ${cliente.nombre} ${cliente.apellido}?, no podrá acceder a su cuenta`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, deshabilitar!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.clientes.map(cli => {
+          if (cli.id == cliente.id) {
+            cli.enabled = false;
+          }
+          return cli;
+        })
+        this.customersService.disabled(cliente.id).subscribe(
+          response => {
+            swalWithBootstrapButtons.fire(
+              'Cliente Deshabilitado!',
+              `Cliente ${cliente.nombre} deshabilitado con exito`,
+              'success'
+            )
+          }
+        )
+      }
+    })
+  }
+
+  enabled(cliente: Cliente) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-outline-primary',
+        cancelButton: 'btn btn-outline-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Esta seguro?',
+      text: `¿Seguro que desea habilitar al cliente ${cliente.nombre} ${cliente.apellido}?, tendrá acceso a su cuenta`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, habilitar!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.clientes.map(cli => {
+          if (cli.id == cliente.id) {
+            cli.enabled = true;
+          }
+          return cli;
+        })
+        this.customersService.enabled(cliente.id).subscribe(
+          response => {
+            swalWithBootstrapButtons.fire(
+              'Cliente Habilitado!',
+              `Cliente ${cliente.nombre} habilitado con exito`,
+              'success'
+            )
+          }
+        )
+      }
+    })
+
   }
 
   delete(cliente: Cliente): void {
@@ -131,6 +201,11 @@ export class CustomersComponent implements OnInit {
 
   abrirModalEdit(cliente: Cliente) {
     this.editCustomerService.abrirModal();
+    this.clienteSeleccionado = cliente;
+  }
+
+  abrirModalImg(cliente: Cliente) {
+    this.imgCustomerService.abrirModal();
     this.clienteSeleccionado = cliente;
   }
 

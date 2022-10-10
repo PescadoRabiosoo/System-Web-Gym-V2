@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario.model';
+import { ImgProfileService } from 'src/app/pages/user/profile/img-profile/img-profile.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SidebarService } from 'src/app/services/sidebar.service';
 import Swal from 'sweetalert2';
@@ -19,7 +20,8 @@ export class SidebarComponent implements OnInit {
 
   constructor(private sidebarService: SidebarService,
     private authService: AuthService,
-    private router: Router) {
+    private router: Router,
+    public imgProfileService: ImgProfileService) {
     this.menuItems = sidebarService.menu;
   }
 
@@ -28,6 +30,10 @@ export class SidebarComponent implements OnInit {
 
     this.authService.obtenerUsuario(this.id).subscribe(response => {
       this.usuarioLogeado = response as Usuario;
+    });
+
+    this.imgProfileService.notificarUpload.subscribe(usuario => {
+      this.usuarioLogeado = usuario;
     });
   }
 

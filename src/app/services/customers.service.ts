@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
@@ -42,7 +42,6 @@ export class CustomersService {
       catchError(e => {
 
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/clientes']);
           console.error(e.error.mensaje);
         }
 
@@ -52,7 +51,6 @@ export class CustomersService {
   }
 
   update(cliente: Cliente): Observable<any> {
-    console.log(cliente)
     return this.http.put<any>(`${this.urlEndPoint}/${cliente.id}`, cliente).pipe(
       catchError(e => {
 
@@ -68,6 +66,40 @@ export class CustomersService {
       })
     )
   }
+
+  subirFoto(archivo: File, id): Observable<HttpEvent<{}>> {
+    let formData = new FormData();
+    formData.append("archivo", archivo);
+    formData.append("id", id);
+
+    const req = new HttpRequest('POST', `${this.urlEndPoint}/upload`, formData, {
+      reportProgress: true,
+    })
+    return this.http.request(req);
+  };
+
+  disabled(id: number) {
+    return this.http.delete(`${this.urlEndPoint}/deshabilitar/${id}`).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(() => e);
+      })
+    )
+  }
+
+  enabled(id: number) {
+    return this.http.delete(`${this.urlEndPoint}/habilitar/${id}`).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(() => e);
+      })
+    )
+  }
+
 
   delete(id: number): Observable<Cliente> {
     return this.http.delete<Cliente>(`${this.urlEndPoint}/${id}`).pipe(
