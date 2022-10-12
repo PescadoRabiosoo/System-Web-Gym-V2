@@ -1,0 +1,78 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="verCursoService.modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}} - {{curso.id}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="card">
+                    <div class="card-body p-b-5">
+                        <p class="font-bold text-muted text-uppercase m-b-5">
+                            {{curso.nombre}}
+                        </p>
+                        <p class="font-bold h3 m-b-5">
+                            S/. {{curso.precio}}
+                        </p>
+                        <p class="text-muted">
+                            {{curso.vacantes}} vacantes
+                        </p>
+                        <p class="m-t-5 m-b-0">
+                            {{curso.descripcion}}
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="card-body d-flex justify-content-around p-t-5">
+                        <span>
+                            <i class="mdi mdi-calendar text-muted m-r-5"></i>
+                            <strong class="mr-1">{{curso.fechaInicio | date:"dd 'de' MMMM"}}</strong>
+                        </span>
+                        -
+                        <span>
+                            <i class="mdi mdi-calendar text-muted m-r-5"></i>
+                            <strong class="mr-1">{{curso.fechaFinal | date:"dd 'de' MMMM"}}</strong>
+                        </span>
+                    </div>
+                    <div class="card-body d-flex justify-content-around pt-2">
+                        <span>
+                            <i class="mdi mdi-clock text-muted m-r-5"></i>
+                            <strong class="mr-1">{{curso.horaInicio}}</strong>
+                        </span>
+                        -
+                        <span>
+                            <i class="mdi mdi-clock text-muted m-r-5"></i>
+                            <strong class="mr-1">{{curso.horaFinal}}</strong>
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-uppercase text-muted font-bold small">
+                            Entrenador
+                        </p>
+                        <div class="d-flex align-items-center">
+                            <img src="http://localhost:8080/images/productos/nottrainer.png" alt=""
+                                style="width:45px; height:45px" class="rounded-circle">
+
+                            <div class="m-l-5">
+                                <p class="font-bold m-b-5">{{curso.entrenador.nombre}} {{curso.entrenador.apellido}}
+                                </p>
+                                <p class="text-muted m-b-0">{{curso.entrenador.especialidad.nombre}}</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

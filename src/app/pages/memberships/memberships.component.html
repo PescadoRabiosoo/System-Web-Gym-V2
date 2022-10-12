@@ -1,1 +1,87 @@
-<p>memberships works!</p>
+<app-add-membership></app-add-membership>
+<app-edit-membership [membresia]="membresiaSeleccionada"></app-edit-membership>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Lista de Membresias:</h4>
+                                <div>
+                                    <button class="btn btn-primary pull-left m-b-10" (click)="abrirModal()">
+                                        <i class="mdi mdi-plus"></i> Nueva Membresia
+                                    </button>
+                                </div>
+
+                                <!--<h6 class="card-subtitle">Add class <code>.full-color-table .full-primary-table .hover-table</code></h6>-->
+                                <div class="table-responsive">
+                                    <table class="table table-hover color-table purple-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Descripcion</th>
+                                                <th>duracion</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let membresia of membresias">
+                                                <td>
+                                                    <p class="font-bold m-b-5">
+                                                        {{membresia.id}}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="font-bold">
+                                                        {{membresia.nombre}}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    S/. {{membresia.precio}}
+                                                </td>
+                                                <td>
+                                                    {{membresia.descripcion}}
+                                                </td>
+                                                <td>
+                                                    {{membresia.duracion}} meses
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm"
+                                                        (click)="abrirModalEdit(membresia)">
+                                                        <i class="mdi mdi-account-edit"></i>
+                                                        Editar
+                                                    </button>
+                                                    &nbsp;
+                                                    <button class="btn btn-outline-danger btn-sm">
+                                                        <i class="mdi mdi-account-off"></i>
+                                                        Deshabilitar
+                                                    </button>
+                                                    <button *ngIf="!membresia" class="btn btn-outline-success btn-sm">
+                                                        <i class="mdi mdi-account"></i>
+                                                        Habilitar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <app-paginator-memberships *ngIf="paginador" [paginador]="paginador">
+                                    </app-paginator-memberships>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -8,7 +8,7 @@ import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     IncrementadorComponent,
-    DonaComponent
+    DonaComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +17,7 @@ import { NgChartsModule } from 'ng2-charts';
   ],
   exports: [
     IncrementadorComponent,
-    DonaComponent
+    DonaComponent,
   ]
 })
 export class ComponentsModule { }

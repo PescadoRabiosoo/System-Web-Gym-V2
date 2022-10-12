@@ -23,12 +23,12 @@
                                 <!--<h6 class="card-subtitle">Add class <code>.full-color-table .full-primary-table .hover-table</code></h6>-->
                                 <div class="table-responsive">
                                     <table class="table table-hover color-table purple-table">
-                                        <div class="alert alert-info text-center justify-content-center"
+                                        <!--<div class="alert alert-info text-center justify-content-center"
                                             *ngIf="(clientes | filtroCustomers:pages:search).length === 0">
                                             No existen más registros
-                                        </div>
+                                        </div>-->
 
-                                        <thead *ngIf="(clientes | filtroCustomers:pages:search).length != 0">
+                                        <thead>
                                             <tr>
                                                 <th>Cliente</th>
                                                 <th>DNI</th>
@@ -38,8 +38,8 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody *ngIf="(clientes | filtroCustomers:pages:search).length != 0">
-                                            <tr *ngFor="let cliente of clientes | filtroCustomers:pages:search">
+                                        <tbody>
+                                            <tr *ngFor="let cliente of clientes | filtroCustomers:search">
                                                 <td>
                                                     <div class="d-flex">
                                                         <img *ngIf="cliente?.foto" (click)="abrirModalImg(cliente)"
@@ -79,7 +79,8 @@
                                                         Editar
                                                     </button>
                                                     &nbsp;
-                                                    <button class="btn btn-outline-primary btn-sm">
+                                                    <button [routerLink]="['/customers/detail', cliente.id]"
+                                                        class="btn btn-outline-primary btn-sm">
                                                         <i class="mdi mdi-eye"></i>
                                                         Ver Detalle
                                                     </button>
@@ -101,13 +102,15 @@
                                         </tbody>
                                     </table>
 
-                                    <div class="btn-group pagination justify-content-center">
+                                    <app-paginator-customers *ngIf="paginador" [paginador]="paginador">
+                                    </app-paginator-customers>
+                                    <!--<div class="btn-group pagination justify-content-center">
                                         <button type="button" (click)="anterior()"
                                             class="btn btn-outline-primary">Anterior</button>
                                         <button type="button" (click)="siguiente()"
                                             [disabled]="(clientes | filtroCustomers:pages:search).length === 0"
                                             class="btn btn-outline-primary">Siguiente</button>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
 

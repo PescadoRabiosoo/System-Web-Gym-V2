@@ -22,9 +22,7 @@ export class EditCustomerComponent implements OnInit, OnChanges {
   constructor(private router: Router,
     public editCustomerService: EditCustomerService,
     private customersService: CustomersService,
-    private formBuilder: FormBuilder) {
-
-  }
+    private formBuilder: FormBuilder) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.buildForm();

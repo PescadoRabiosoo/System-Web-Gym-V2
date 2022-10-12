@@ -1,1 +1,44 @@
-<p>membresias works!</p>
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row pricing-plan">
+                    <div class="col-md-4 col-xs-12 col-sm-6 no-padding" *ngFor="let membresia of membresias">
+                        <div class="pricing-box"
+                            [class.featured-plan]="usuarioComparar.membresia.nombre === membresia.nombre">
+                            <div class="pricing-body b-l">
+                                <div class="pricing-header">
+                                    <h4 *ngIf="usuarioComparar.membresia.nombre === membresia.nombre"
+                                        class="price-lable text-white bg-warning"> Suscrito</h4>
+                                    <h4 class="text-center">{{membresia.nombre}}</h4>
+                                    <h2 class="text-center"><span class="price-sign">S/. </span> {{membresia.precio}}
+                                    </h2>
+                                    <p class="uppercase">{{membresia.duracion}} meses</p>
+                                </div>
+                                <div class="price-table-content">
+                                    <div class="price-row"><i class="icon-user"></i> 3 Members</div>
+                                    <div class="price-row"><i class="icon-screen-smartphone"></i> Single Device</div>
+                                    <div class="price-row"><i class="icon-drawar"></i> 50GB Storage</div>
+                                    <div class="price-row"><i class="icon-refresh"></i> Monthly Backups</div>
+                                    <div class="price-row">
+                                        <button *ngIf="usuarioComparar.membresia.nombre != membresia.nombre"
+                                            class="btn btn-primary waves-effect waves-light m-t-20"
+                                            (click)="suscribirse(membresia)">Suscribirse</button>
+                                        <button *ngIf="usuarioComparar.membresia.nombre === membresia.nombre"
+                                            class="btn btn-lg btn-primary waves-effect waves-light m-t-20">Renovar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

@@ -9,6 +9,11 @@ import { ProductosComponent } from './productos/productos.component';
 import { MembresiasComponent } from './membresias/membresias.component';
 import { PresencialesComponent } from './cursos/presenciales/presenciales.component';
 import { VirtualesComponent } from './cursos/virtuales/virtuales.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ImgPerfilComponent } from './espacio/img-perfil/img-perfil.component';
+import { VerCompraComponent } from './espacio/ver-compra/ver-compra.component';
+import { VerCursoComponent } from './espacio/ver-curso/ver-curso.component';
+import { PasarelaPagoComponent } from './pasarela-pago/pasarela-pago.component';
 
 
 
@@ -20,12 +25,20 @@ import { VirtualesComponent } from './cursos/virtuales/virtuales.component';
     ProductosComponent,
     MembresiasComponent,
     PresencialesComponent,
-    VirtualesComponent
+    VirtualesComponent,
+    ImgPerfilComponent,
+    VerCompraComponent,
+    VerCursoComponent,
+    PasarelaPagoComponent
   ],
   imports: [
     CommonModule,
     SharedClienteModule,
     AppRoutingModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    AjustesComponent
   ]
 })
 export class PagesClienteModule { }

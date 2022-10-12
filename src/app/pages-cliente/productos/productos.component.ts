@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Producto } from 'src/app/models/producto.model';
+import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-productos',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductosComponent implements OnInit {
 
-  constructor() { }
+  productos: Producto[];
+  paginador: any;
+
+  constructor(private activatedRoute: ActivatedRoute,
+    private productsService: ProductsService) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+
+      this.productsService.getProductos(page)
+        .subscribe(response => {
+          this.productos = response.content as Producto[]
+          this.paginador = response;
+        })
+    });
   }
 
 }

@@ -39,9 +39,35 @@ export class SidebarComponent implements OnInit {
 
   logout(): void {
     let username = this.authService.usuario.nombre;
-    this.authService.logout();
-    Swal.fire('Logout', `Hola ${username}, has cerrado sesión con exito`, 'success');
-    this.router.navigate(['/login']);
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-outline-primary',
+        cancelButton: 'btn btn-outline-danger'
+      },
+      buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: 'Esta seguro?',
+      text: `¿Seguro que desea cerrar sesión?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si!',
+      cancelButtonText: 'No!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.authService.logout();
+        swalWithBootstrapButtons.fire(
+          'Sesión terminada!',
+          `${username} Ha cerrado sesión con exito`,
+          'success'
+        )
+        this.router.navigate(['/login']);
+      }
+    })
+
   }
 
 }

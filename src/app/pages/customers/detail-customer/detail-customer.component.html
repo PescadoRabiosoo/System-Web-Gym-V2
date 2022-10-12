@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <p>nombre: {{cliente.nombre}}</p>
+                <p>apellido: {{cliente.apellido}}</p>
+                <p>dni: {{cliente.dni}}</p>
+                <p>correo: {{cliente.correo}}</p>
+                <p>telefono: {{cliente.telefono}}</p>
+                <p>membresia: {{cliente.membresia.nombre}}</p>
+                <p>horario: {{cliente.hora.horaInicio}} {{cliente.hora.horaFinal}}</p>
+                <p>Compras:</p>
+                <ul *ngFor="let comprobante of cliente.comprobantes">
+                    <li>id: {{comprobante.id}}</li>
+                    <li>descripcion: {{comprobante.descripcion}}</li>
+                    <li>observacion: {{comprobante.observacion}}</li>
+                    <li>fecha: {{comprobante.createAt | date:"dd-MMMM-yyyy"}}</li>
+                    <p></p>
+                </ul>
+                <p>Cursos:</p>
+                <ul *ngFor="let curso of cliente.cursos">
+                    <li>nombre: {{curso.nombre}}</li>
+                    <li>descripcion: {{curso.descripcion}}</li>
+                    <li>horario: {{curso.horaInicio}} - {{curso.horaFinal}} </li>
+                    <li>fecha: {{curso.fechaInicio | date:"dd-MMMM-yyyy"}} - {{curso.fechaFinal |
+                        date:"dd-MMMM-yyyy"}}</li>
+                    <p></p>
+                    <p>Entrenador:</p>
+                    <li>nombre: {{curso.entrenador.nombre}}</li>
+                    <li>especialidad: {{curso.entrenador.especialidad.nombre}}</li>
+                    <p></p>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

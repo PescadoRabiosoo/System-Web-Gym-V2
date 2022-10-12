@@ -18,4 +18,5 @@ export class Cliente {
     hora: HoraDisponible;
     comprobantes: Array<ComprobanteProducto> = []
     roles: string[] = [];
+    cursos: string[] = [];
 }

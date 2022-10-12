@@ -12,6 +12,7 @@ import { VirtualComponent } from './courses/virtual/virtual.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { RoleGuard } from '../guards/role.guard';
+import { DetailCustomerComponent } from './customers/detail-customer/detail-customer.component';
 
 const routes: Routes = [
     {
@@ -40,6 +41,8 @@ const routes: Routes = [
         data: { role: 'ROLE_ADMIN' },
         children: [
             { path: '', component: CustomersComponent, data: { titulo: 'Clientes' } },
+            { path: 'page/:page', component: CustomersComponent, data: { titulo: 'Clientes' } },
+            { path: 'detail/:id', component: DetailCustomerComponent, data: { titulo: 'Detalle de Cliente' } },
         ]
     },
     {
@@ -58,6 +61,7 @@ const routes: Routes = [
         data: { role: 'ROLE_ADMIN' },
         children: [
             { path: '', component: ProductsComponent, data: { titulo: 'Productos' } },
+            { path: 'page/:page', component: ProductsComponent, data: { titulo: 'Productos' } }
         ]
     },
     {
@@ -67,6 +71,7 @@ const routes: Routes = [
         data: { role: 'ROLE_ADMIN' },
         children: [
             { path: '', component: TrainersComponent, data: { titulo: 'Entrenadores' } },
+            { path: 'page/:page', component: TrainersComponent, data: { titulo: 'Entrenadores' } }
         ]
     },
     {

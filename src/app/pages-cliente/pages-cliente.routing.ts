@@ -8,6 +8,7 @@ import { AjustesComponent } from "./espacio/ajustes/ajustes.component";
 import { EspacioComponent } from "./espacio/espacio.component";
 import { MembresiasComponent } from "./membresias/membresias.component";
 import { PagesClienteComponent } from "./pages-cliente.component";
+import { PasarelaPagoComponent } from "./pasarela-pago/pasarela-pago.component";
 import { ProductosComponent } from "./productos/productos.component";
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
         canActivate: [AuthGuard, RoleGuard],
         data: { role: 'ROLE_USER' },
         children: [
-            { path: '', component: EspacioComponent, data: { titulo: 'Perfil' } },
+            { path: '', component: EspacioComponent, data: { titulo: 'Mi Espacio' } },
             { path: 'ajustes', component: AjustesComponent, data: { titulo: 'Ajustes' } },
         ]
     },
@@ -55,6 +56,15 @@ const routes: Routes = [
         data: { role: 'ROLE_USER' },
         children: [
             { path: '', component: VirtualesComponent, data: { titulo: 'Cursos Virtuales' } },
+        ]
+    },
+    {
+        path: 'pago',
+        component: PagesClienteComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'ROLE_USER' },
+        children: [
+            { path: '', component: PasarelaPagoComponent, data: { titulo: 'Pasarella de Pago' } },
         ]
     },
 ]

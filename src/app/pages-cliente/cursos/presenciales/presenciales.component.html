@@ -1,1 +1,67 @@
-<p>presenciales works!</p>
+<div class="row justify-content-end m-r-5 bg">
+    <input type="text" class="form-control m-b-10" style="width: 200px;" placeholder="Buscar por nombre">
+</div>
+
+<div class="row">
+    <div class="col-3" *ngFor="let presencial of presenciales">
+        <div class="card">
+            <img *ngIf="presencial?.foto" src="http://localhost:8080/gym/uploads/imgcursopresencial/{{presencial.foto}}"
+                alt="{{presencial.foto}}" class="card-img-top">
+            <img *ngIf="!presencial?.foto" src="http://localhost:8080/images/productos/notcourse.png" alt="sin foto"
+                class="card-img-top">
+            <div class="card-body p-b-5">
+                <p class="font-bold text-muted text-uppercase m-b-5">
+                    {{presencial.nombre}}
+                </p>
+                <p class="font-bold h3 m-b-5">
+                    S/. {{presencial.precio}}
+                </p>
+                <p class="text-muted">
+                    {{presencial.vacantes}} vacantes
+                </p>
+                <p class="m-t-5 m-b-0">
+                    {{presencial.descripcion}}
+                </p>
+            </div>
+            <hr>
+            <div class="card-body d-flex justify-content-around p-t-5">
+                <span>
+                    <i class="mdi mdi-calendar text-muted m-r-5"></i>
+                    <strong class="mr-1">{{presencial.fechaInicio | date:"dd 'de' MMMM"}}</strong>
+                </span>
+                -
+                <span>
+                    <i class="mdi mdi-calendar text-muted m-r-5"></i>
+                    <strong class="mr-1">{{presencial.fechaFinal | date:"dd 'de' MMMM"}}</strong>
+                </span>
+            </div>
+            <div class="card-body d-flex justify-content-around pt-2">
+                <span>
+                    <i class="mdi mdi-clock text-muted m-r-5"></i>
+                    <strong class="mr-1">{{presencial.horaInicio}}</strong>
+                </span>
+                -
+                <span>
+                    <i class="mdi mdi-clock text-muted m-r-5"></i>
+                    <strong class="mr-1">{{presencial.horaFinal}}</strong>
+                </span>
+            </div>
+            <div class="card-body">
+                <p class="text-uppercase text-muted font-bold small">
+                    Entrenador
+                </p>
+                <div class="d-flex align-items-center">
+                    <img src="http://localhost:8080/images/productos/nottrainer.png" alt=""
+                        style="width:45px; height:45px" class="rounded-circle">
+
+                    <div class="m-l-5">
+                        <p class="font-bold m-b-5">{{presencial.entrenador.nombre}} {{presencial.entrenador.apellido}}
+                        </p>
+                        <p class="text-muted m-b-0">{{presencial.entrenador.especialidad.nombre}}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

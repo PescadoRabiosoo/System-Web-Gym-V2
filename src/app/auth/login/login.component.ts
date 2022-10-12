@@ -67,8 +67,12 @@ export class LoginComponent implements OnInit {
 
         Swal.fire('Login', `Hola ${usuario.nombre}, has iniciado sesión con exito`, 'success');
       }, err => {
-        if (err.status == 400) {
+
+        let contar = err.error.error_description.length;
+        if (err.status == 400 && contar == 15) {
           Swal.fire('Error Login', 'Correo y/o contraseña incorrectas', 'error')
+        } else if (contar == 16) {
+          Swal.fire('Error Login', 'Su cuenta esta suspendida', 'error')
         }
       }
       );

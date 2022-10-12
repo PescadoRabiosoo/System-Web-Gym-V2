@@ -22,19 +22,29 @@ export class CustomersComponent implements OnInit {
   search: string = '';
   pages: number = 0;
 
-  constructor(private customersService: CustomersService,
+  constructor(private activatedRoute: ActivatedRoute,
+    private customersService: CustomersService,
     public authService: AuthService,
     public addCustomerService: AddCustomerService,
     public editCustomerService: EditCustomerService,
     public imgCustomerService: ImgCustomerService) { }
 
   ngOnInit(): void {
-    this.customersService.getClientesAll()
-      .subscribe(
-        clientes => {
-          this.clientes = clientes
-        });
+    this.activatedRoute.paramMap.subscribe(params => {
+      let page: number = +params.get('page');
 
+      if (!page) {
+        page = 0;
+      }
+
+      this.customersService.getClientes(page)
+        .subscribe(
+          response => {
+            this.clientes = response.content as Cliente[]
+            this.paginador = response;
+          }
+        )
+    });
 
     this.addCustomerService.notificarUpload.subscribe(cliente => {
       this.clientes.push(cliente);
@@ -171,7 +181,7 @@ export class CustomersComponent implements OnInit {
   }
 
   btnSearchCliente(search: string) {
-    /*if (search != '') {
+    if (search != '') {
       this.customersService.getClientesAll().subscribe(clientes =>
         this.clientes = clientes
       )
@@ -181,8 +191,7 @@ export class CustomersComponent implements OnInit {
         this.clientes = response.content as Cliente[]
         this.paginador = response;
       })
-    }*/
-    this.pages = 0;
+    }
     this.search = search;
   }
 

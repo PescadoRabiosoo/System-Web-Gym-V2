@@ -1,1 +1,32 @@
-<p>productos works!</p>
+<div class="row justify-content-end m-r-20 m-b-20">
+    <input type="text" class="form-control" style="width: 200px;" placeholder="Buscar por nombre">
+</div>
+
+
+<div class="row">
+    <div class="col-3" *ngFor="let producto of productos">
+        <div class="card m-t-5 muevete">
+            <div class="product align-items-center p-2 text-center">
+                <img *ngIf="producto?.foto" src="http://localhost:8080/gym/uploads/imgproducto/{{producto.foto}}"
+                    alt="{{producto.foto}}" class="rounded" width="150">
+                <img *ngIf="!producto?.foto" src="http://localhost:8080/images/productos/notpackage.png" alt="sin foto"
+                    class="rounded" width="150">
+                <h5 class="m-t-20">{{producto.nombre}}</h5>
+                <div class="m-t-5 info">
+                    <span class="text1 d-block text-muted">
+                        {{producto.tipo.nombre}}
+                    </span>
+                    <span class="text1 text-muted">
+                        {{producto.marca}}
+                    </span>
+                </div>
+                <div class="cost m-t-5 text-dark">
+                    <span>S/. {{producto.precio}}</span>
+                </div>
+            </div>
+            <div class="p-3 shoe text-center text-white m-t-5 cursor bg-primary">
+                <span class="text-uppercase">Agregar al carrito</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="verCompraService.modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}} - {{comprobante.id}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-hover color-table purple-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th>Marca</th>
+                            <th>Precio Unit.</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of comprobante.items">
+                            <td>
+                                {{item.id}}
+                            </td>
+                            <td>
+                                {{item.producto.nombre}}
+                            </td>
+                            <td>
+                                {{item.cantidad}} und.
+                            </td>
+                            <td>
+                                {{item.producto.marca | uppercase}}
+                            </td>
+                            <td>
+                                S/. {{item.producto.precio}}
+                            </td>
+                            <td>
+                                S/. {{item.importe}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row pull-right m-r-10">
+                    <p class="font-bold m-r-10">
+                        Gran Total:
+                    </p>
+                    <p class="text-muted">
+                        S/. {{comprobante.total}}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

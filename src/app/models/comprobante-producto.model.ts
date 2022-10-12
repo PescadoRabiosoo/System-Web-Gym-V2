@@ -3,6 +3,8 @@ import { ItemComprobanteProducto } from "./item-comprobante-producto.model";
 
 export class ComprobanteProducto {
     id: number;
+    comprobante: string;
+    observacion: string;
     createAt: Date;
     cliente: Cliente;
     items: Array<ItemComprobanteProducto> = [];

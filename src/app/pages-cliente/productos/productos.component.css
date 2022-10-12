@@ -1,0 +1,31 @@
+.muevete:hover {
+    transform: translateY(-15px);
+    transition: transform .3s;
+}
+
+.muevete {
+    border-radius: 20px;
+}
+
+.text1 {
+    font-size: 13px;
+}
+
+.info {
+    line-height: 17px;
+}
+
+.cost span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.shoe:hover {
+    opacity: .8;
+}
+
+.cursor {
+    cursor: pointer;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
+import { ImgPerfilService } from 'src/app/pages-cliente/espacio/img-perfil/img-perfil.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 declare function customSidebar(): void;
@@ -14,7 +15,8 @@ export class NavbarComponent implements OnInit {
   id: number;
   usuarioLogeado: Usuario = new Usuario();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    public imgPerfilService: ImgPerfilService) { }
 
   ngOnInit(): void {
     customSidebar();
@@ -22,6 +24,10 @@ export class NavbarComponent implements OnInit {
 
     this.authService.obtenerUsuario(this.id).subscribe(response => {
       this.usuarioLogeado = response as Usuario;
+    });
+
+    this.imgPerfilService.notificarUpload.subscribe(usuario => {
+      this.usuarioLogeado = usuario;
     });
   }
 

@@ -1,1 +1,104 @@
-<p>products works!</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Lista de Productos:</h4>
+                                <div>
+                                    <button class="btn btn-primary pull-left m-b-10">
+                                        <i class="mdi mdi-plus"></i> Nuevo Producto
+                                    </button>
+                                    <input type="text" class="form-control pull-right m-b-10" style="width: 200px;"
+                                        placeholder="Buscar por nombre" #txtSearch
+                                        (keyup)="btnSearchProducto(txtSearch.value)">
+                                </div>
+
+                                <!--<h6 class="card-subtitle">Add class <code>.full-color-table .full-primary-table .hover-table</code></h6>-->
+                                <div class="table-responsive">
+                                    <table class="table table-hover color-table purple-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Precio</th>
+                                                <th>Stock</th>
+                                                <th>Marca</th>
+                                                <th>Fecha de Registro</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let producto of productos | filtroProducts:search">
+                                                <td>
+                                                    <div class="d-flex">
+                                                        <img *ngIf="producto?.foto"
+                                                            src="http://localhost:8080/gym/uploads/imgproducto/{{producto.foto}}"
+                                                            alt="{{producto.foto}}" class="img-thumbail rounded-circle"
+                                                            style="width: 65px;height: 65px;">
+                                                        <img *ngIf="!producto?.foto"
+                                                            src="http://localhost:8080/images/productos/notpackage.png"
+                                                            alt="sin foto" class="img-thumbail rounded-circle"
+                                                            style="width: 65px;">
+                                                        <div class="ml-3">
+                                                            <p class="font-bold m-b-5">{{producto.nombre}}
+                                                            </p>
+                                                            <p class="text-muted m-b-5">{{producto.tipo.nombre}}</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <p class="font-bold">S/. {{producto.precio}}</p>
+                                                </td>
+                                                <td>
+                                                    <p class="font-weight-bold">{{producto.stock}} und.</p>
+                                                </td>
+                                                <td>
+                                                    <p class="font-weight-bold">{{producto.marca}}</p>
+                                                </td>
+                                                <td>
+                                                    {{producto.createAt | date:"dd 'de' MMMM 'del' yyyy"}}
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-outline-primary btn-sm">
+                                                        <i class="mdi mdi-account-edit"></i>
+                                                        Editar
+                                                    </button>
+                                                    &nbsp;
+                                                    <button class="btn btn-outline-primary btn-sm">
+                                                        <i class="mdi mdi-plus"></i>
+                                                        Añadir
+                                                    </button>
+                                                    &nbsp;
+                                                    <button class="btn btn-outline-danger btn-sm">
+                                                        <i class="mdi mdi-account-off"></i>
+                                                        Deshabilitar
+                                                    </button>
+                                                    <button *ngIf="!producto" class="btn btn-outline-success btn-sm">
+                                                        <i class="mdi mdi-account"></i>
+                                                        Habilitar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <app-paginator-products *ngIf="paginador" [paginador]="paginador">
+                                    </app-paginator-products>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

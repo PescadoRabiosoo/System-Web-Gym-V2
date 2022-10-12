@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
       telefono: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9), Validators.pattern(/^[0-9]+$/)]],
       membresia: ['', [Validators.required]],
       hora: ['', [Validators.required]],
-      terminos: [true, Validators.requiredTrue],
+      terminos: [false, Validators.requiredTrue],
     })
   }
 
