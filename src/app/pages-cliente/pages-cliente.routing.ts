@@ -65,6 +65,8 @@ const routes: Routes = [
         data: { role: 'ROLE_USER' },
         children: [
             { path: '', component: PasarelaPagoComponent, data: { titulo: 'Pasarella de Pago' } },
+            { path: 'membresia/:membresia/:id', component: PasarelaPagoComponent, data: { titulo: 'Pasarella de Pago' } },
+            { path: ':id', component: PasarelaPagoComponent, data: { titulo: 'Pasarella de Pago' } },
         ]
     },
 ]

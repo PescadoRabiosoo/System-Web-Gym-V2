@@ -29,6 +29,7 @@ import { PaginatorTrainersComponent } from './trainers/paginator/paginator-train
 import { PaginatorMembershipsComponent } from './memberships/paginator/paginator-memberships.component';
 import { AddMembershipComponent } from './memberships/add-membership/add-membership.component';
 import { EditMembershipComponent } from './memberships/edit-membership/edit-membership.component';
+import { FiltroMembershipsPipe } from './memberships/pipes/filtro-memberships.pipe';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { EditMembershipComponent } from './memberships/edit-membership/edit-memb
     PaginatorMembershipsComponent,
     AddMembershipComponent,
     EditMembershipComponent,
+    FiltroMembershipsPipe,
   ],
   imports: [
     CommonModule,

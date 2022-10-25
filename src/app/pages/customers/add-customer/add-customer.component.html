@@ -13,7 +13,7 @@
                 <form [formGroup]="crearForm" (ngSubmit)="save($event)">
                     <div class="form-body">
                         <h3 class="card-title">Datos del Cliente</h3>
-                        <hr>
+
                         <div class="row p-t-20">
                             <div class="col-md-6">
                                 <div class="form-group" [class.has-danger]="nombreFieldIsInvalid"
@@ -128,6 +128,7 @@
                                 </div>
                             </div>
                         </div>
+                        <hr>
                         <!--/row-->
                         <h3 class="box-title m-t-40">Sobre la Membresia</h3>
                         <hr>

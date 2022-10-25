@@ -15,6 +15,9 @@
                                     <button class="btn btn-primary pull-left m-b-10" (click)="abrirModal()">
                                         <i class="mdi mdi-plus"></i> Nueva Membresia
                                     </button>
+                                    <input type="text" class="form-control pull-right m-b-10" style="width: 200px;"
+                                        placeholder="Buscar por nombre" #txtSearch
+                                        (keyup)="btnSearchMembresia(txtSearch.value)">
                                 </div>
 
                                 <!--<h6 class="card-subtitle">Add class <code>.full-color-table .full-primary-table .hover-table</code></h6>-->
@@ -26,12 +29,13 @@
                                                 <th>Nombre</th>
                                                 <th>Precio</th>
                                                 <th>Descripcion</th>
-                                                <th>duracion</th>
+                                                <th>Duracion</th>
+                                                <th># Clientes</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let membresia of membresias">
+                                            <tr *ngFor="let membresia of membresias | filtroMemberships:search">
                                                 <td>
                                                     <p class="font-bold m-b-5">
                                                         {{membresia.id}}
@@ -52,17 +56,53 @@
                                                     {{membresia.duracion}} meses
                                                 </td>
                                                 <td>
+                                                    <span class="image-list m-t-20"
+                                                        *ngIf="membresia.clientes.length > 0">
+                                                        <img *ngIf="membresia.clientes[0]?.foto"
+                                                            src="http://localhost:8080/gym/uploads/imgcliente/{{membresia.clientes[0].foto}}"
+                                                            class="img-circle" alt="{{membresia.clientes[0].foto}}"
+                                                            width="30" height="30">
+                                                        <img *ngIf="!membresia.clientes[0]?.foto"
+                                                            src="http://localhost:8080/images/productos/notuser.png"
+                                                            class="img-circle" alt="sin foto" width="30" height="30">
+                                                        <img *ngIf="membresia.clientes[1]?.foto"
+                                                            src="http://localhost:8080/gym/uploads/imgcliente/{{membresia.clientes[1].foto}}"
+                                                            class="img-circle" alt="{{membresia.clientes[1].foto}}"
+                                                            width="30" height="30">
+                                                        <img *ngIf="!membresia.clientes[1]?.foto"
+                                                            src="http://localhost:8080/images/productos/notuser.png"
+                                                            class="img-circle" alt="sin foto" width="30" height="30">
+                                                        <img *ngIf="membresia.clientes[2]?.foto"
+                                                            src="http://localhost:8080/gym/uploads/imgcliente/{{membresia.clientes[2].foto}}"
+                                                            class="img-circle" alt="{{membresia.clientes[2].foto}}"
+                                                            width="30" height="30">
+                                                        <img *ngIf="!membresia.clientes[2]?.foto"
+                                                            src="http://localhost:8080/images/productos/notuser.png"
+                                                            class="img-circle" alt="sin foto" width="30" height="30">
+                                                        <span *ngIf="membresia.clientes.length > 3" class="text-muted">
+                                                            +{{membresia.clientes.length - 3 }} clientes</span>
+                                                    </span>
+                                                    <span *ngIf="membresia.clientes.length == 0"
+                                                        class="badge bg-warning rounded-pill">
+                                                        No cuenta con clientes suscritos
+                                                    </span>
+                                                </td>
+                                                <td>
                                                     <button class="btn btn-outline-primary btn-sm"
                                                         (click)="abrirModalEdit(membresia)">
                                                         <i class="mdi mdi-account-edit"></i>
                                                         Editar
                                                     </button>
                                                     &nbsp;
-                                                    <button class="btn btn-outline-danger btn-sm">
+                                                    <button *ngIf="membresia.enabled == true"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="disabled(membresia)">
                                                         <i class="mdi mdi-account-off"></i>
                                                         Deshabilitar
                                                     </button>
-                                                    <button *ngIf="!membresia" class="btn btn-outline-success btn-sm">
+                                                    <button *ngIf="membresia.enabled == false"
+                                                        class="btn btn-outline-success btn-sm"
+                                                        (click)="enabled(membresia)">
                                                         <i class="mdi mdi-account"></i>
                                                         Habilitar
                                                     </button>

@@ -34,7 +34,7 @@ export class MembershipsService {
     )
   };
 
-  getProducto(id: number): Observable<Membresia> {
+  getMembresia(id: number): Observable<Membresia> {
     return this.http.get<Membresia>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
         if (e.status == 401 && e.error.mensaje) {
@@ -59,6 +59,28 @@ export class MembershipsService {
       })
     )
   };
+
+  disabled(id: number) {
+    return this.http.delete(`${this.urlEndPoint}/deshabilitar/${id}`).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(() => e);
+      })
+    )
+  }
+
+  enabled(id: number) {
+    return this.http.delete(`${this.urlEndPoint}/habilitar/${id}`).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(() => e);
+      })
+    )
+  }
 
   delete(id: number): Observable<Membresia> {
     return this.http.delete<Membresia>(`${this.urlEndPoint}/${id}`).pipe(

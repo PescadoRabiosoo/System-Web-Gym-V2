@@ -1,1 +1,151 @@
-<p>pasarela-pago works!</p>
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="tarjetaForm" (ngSubmit)="tarjeta($event)">
+                    <div class="form-body">
+                        <h3 class="card-title">Datos de Tarjeta</h3>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="numeroFieldIsInvalid"
+                                    [class.has-success]="numeroFieldIsValid">
+                                    <label class="control-label">Numero de Tarjeta</label>
+                                    <input type="text" class="form-control" mask="0000-0000-0000-0000"
+                                        placeholder="0000-0000-0000-0000" formControlName="numero"
+                                        [class.form-control-danger]="numeroFieldIsInvalid"
+                                        [class.form-control-success]="numeroFieldIsValid">
+                                    <small *ngIf="numeroFieldIsInvalid" class="form-control-feedback"> El campo es
+                                        requerido. </small>
+                                    <small *ngIf="numeroFieldIsValid" class="form-control-feedback"> El campo es
+                                        correcto. </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="codigoFieldIsInvalid"
+                                    [class.has-success]="codigoFieldIsValid">
+                                    <label class="control-label">CVC/CVV</label>
+                                    <input type="text" class="form-control" placeholder="000" mask="000"
+                                        formControlName="codigo" [class.form-control-danger]="codigoFieldIsInvalid"
+                                        [class.form-control-success]="codigoFieldIsValid">
+                                    <small *ngIf="codigoFieldIsInvalid" class="form-control-feedback"> El campo es
+                                        requerido. </small>
+                                    <small *ngIf="codigoFieldIsValid" class="form-control-feedback"> El campo es
+                                        correcto. </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="fechaFieldIsInvalid"
+                                    [class.has-success]="fechaFieldIsValid">
+                                    <label class="control-label">Fecha de Vencimiento</label>
+                                    <input type="text" class="form-control" placeholder="MM/YY" formControlName="fecha"
+                                        [class.form-control-danger]="fechaFieldIsInvalid"
+                                        [class.form-control-success]="fechaFieldIsValid" mask="00/00">
+                                    <small *ngIf="fechaFieldIsInvalid" class="form-control-feedback"> El campo es
+                                        requerido. </small>
+                                    <small *ngIf="fechaFieldIsValid" class="form-control-feedback"> El campo es
+                                        correcto. </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions pull-right">
+                        <button type="submit" class="btn btn-primary waves-effect waves-light"> <i
+                                class="fa fa-check"></i> Pagar</button>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+
+                <h3>Monto del Pedido</h3>
+
+                <table class="table v-middle no-border">
+                    <tbody>
+                        <tr>
+                            <td class="font-bold">SubTotal:</td>
+                            <td class="right">S/. {{membresia.precio}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Impuesto(18%):</td>
+                            <td class="right">S/. {{membresia.precio*0.18}}</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Descuento:</td>
+                            <td class="right">S/. 0.00</td>
+                        </tr>
+                        <hr>
+                        <tr>
+                            <td class="font-bold">Total a pagar:</td>
+                            <td class="right">S/. {{total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="membresia">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+
+                <h3>Pedido</h3>
+
+                <div class="table-responsive">
+                    <table class="table table-hover color-table purple-table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Membresia</th>
+                            <th>Descripcion</th>
+                            <th>Precio</th>
+                            <th>Horario</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{membresia.id}}
+                                </td>
+                                <td>
+                                    {{membresia.nombre}}
+                                </td>
+                                <td>
+                                    {{membresia.descripcion}}
+                                </td>
+                                <td>
+                                    S/. {{membresia.precio}}
+                                </td>
+                                <td>
+                                    {{hora.horaInicio}} - {{hora.horaFinal}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!membresia">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h3>Pedido</h3>
+
+
+            </div>
+        </div>
+    </div>
+</div>

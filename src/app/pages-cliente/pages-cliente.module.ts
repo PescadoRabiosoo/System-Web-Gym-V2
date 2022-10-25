@@ -14,6 +14,8 @@ import { ImgPerfilComponent } from './espacio/img-perfil/img-perfil.component';
 import { VerCompraComponent } from './espacio/ver-compra/ver-compra.component';
 import { VerCursoComponent } from './espacio/ver-curso/ver-curso.component';
 import { PasarelaPagoComponent } from './pasarela-pago/pasarela-pago.component';
+import { RegistroHorarioComponent } from './membresias/registro-horario/registro-horario.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -29,13 +31,15 @@ import { PasarelaPagoComponent } from './pasarela-pago/pasarela-pago.component';
     ImgPerfilComponent,
     VerCompraComponent,
     VerCursoComponent,
-    PasarelaPagoComponent
+    PasarelaPagoComponent,
+    RegistroHorarioComponent
   ],
   imports: [
     CommonModule,
     SharedClienteModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
   ],
   exports: [
     AjustesComponent

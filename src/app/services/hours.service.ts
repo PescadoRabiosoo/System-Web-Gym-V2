@@ -13,4 +13,8 @@ export class HoursService {
   getHoras(): Observable<HoraDisponible[]> {
     return this.http.get<HoraDisponible[]>('http://localhost:8080/gym/horas');
   };
+
+  getHora(id: number): Observable<HoraDisponible> {
+    return this.http.get<HoraDisponible>(`${'http://localhost:8080/gym/horas/' + id}`);
+  }
 }

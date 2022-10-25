@@ -66,8 +66,10 @@
                                                 <td>
                                                     <span *ngIf="cliente.estado==true"
                                                         class="badge bg-success rounded-pill">CON MEMBRESIA</span>
-                                                    <span *ngIf="cliente.estado==false"
-                                                        class="badge bg-warning rounded-pill">SIN MEMBRESIA</span>
+                                                    <span *ngIf="cliente.estado==false && cliente.membresia"
+                                                        class="badge bg-warning rounded-pill">FALTA PAGAR</span>
+                                                    <span *ngIf="cliente.estado==false && !cliente.membresia"
+                                                        class="badge bg-danger rounded-pill">SIN MEMBRESIA</span>
                                                 </td>
                                                 <td>
                                                     {{cliente.createAt | date:"dd 'de' MMMM 'del' yyyy"}}

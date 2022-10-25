@@ -52,6 +52,7 @@ const routes: Routes = [
         data: { role: 'ROLE_ADMIN' },
         children: [
             { path: '', component: MembershipsComponent, data: { titulo: 'Membresias' } },
+            { path: 'page/:page', component: MembershipsComponent, data: { titulo: 'Membresias' } }
         ]
     },
     {
