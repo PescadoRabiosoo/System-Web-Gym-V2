@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Membresia } from 'src/app/models/membresia.model';
 import { MembershipsService } from 'src/app/services/memberships.service';
 import Swal from 'sweetalert2';
+import { MembreshipValidation } from '../membership-validation';
 import { AddMembershipService } from './add-membership.service';
 
 @Component({
@@ -20,7 +22,8 @@ export class AddMembershipComponent implements OnInit {
 
   constructor(public addMembershipService: AddMembershipService,
     private formBuilder: FormBuilder,
-    private membershipsService: MembershipsService) {
+    private membershipsService: MembershipsService,
+    private router: Router) {
     this.buildForm();
   }
 
@@ -29,7 +32,7 @@ export class AddMembershipComponent implements OnInit {
 
   public buildForm() {
     this.agregarMembresiaForm = this.formBuilder.group({
-      nombre: ['', [Validators.required]],
+      nombre: ['', [Validators.required], MembreshipValidation.validateName(this.membershipsService)],
       precio: ['', [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       descripcion: ['', [Validators.required]],
       duracion: ['', [Validators.required, , Validators.pattern(/^[0-9]+$/)]],
@@ -45,6 +48,7 @@ export class AddMembershipComponent implements OnInit {
           this.addMembershipService.notificarUpload.emit(membresia);
           Swal.fire('Nueva Membresia', `La membresia ${membresia.nombre} se ha creado correctamente`, `success`)
           this.cerrarModal();
+
         },
         err => {
           this.errores = err.error.errors as string[];

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../guards/auth.guard";
 import { RoleGuard } from "../guards/role.guard";
+import { CarritoComprasComponent } from "./carrito-compras/carrito-compras.component";
 import { PresencialesComponent } from "./cursos/presenciales/presenciales.component";
 import { VirtualesComponent } from "./cursos/virtuales/virtuales.component";
 import { AjustesComponent } from "./espacio/ajustes/ajustes.component";
@@ -64,9 +65,18 @@ const routes: Routes = [
         canActivate: [AuthGuard, RoleGuard],
         data: { role: 'ROLE_USER' },
         children: [
-            { path: '', component: PasarelaPagoComponent, data: { titulo: 'Pasarella de Pago' } },
-            { path: 'membresia/:membresia/:id', component: PasarelaPagoComponent, data: { titulo: 'Pasarella de Pago' } },
-            { path: ':id', component: PasarelaPagoComponent, data: { titulo: 'Pasarella de Pago' } },
+            { path: '', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
+            { path: 'membresia/:membresia/:id', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
+            { path: ':id', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
+        ]
+    },
+    {
+        path: 'carrito',
+        component: PagesClienteComponent,
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'ROLE_USER' },
+        children: [
+            { path: '', component: CarritoComprasComponent, data: { titulo: 'Carrito de Compras' } },
         ]
     },
 ]

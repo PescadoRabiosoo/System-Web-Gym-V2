@@ -1,0 +1,184 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="addOnSiteService.modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+                <form [formGroup]="crearForm" (ngSubmit)="save($event)">
+                    <div class="form-body">
+                        <h3 class="card-title">Datos del Producto</h3>
+
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="nombreFieldIsInvalid"
+                                    [class.has-success]="nombreFieldIsValid">
+                                    <label class="control-label">Nombre</label>
+                                    <input type="text" class="form-control" placeholder="Nombre"
+                                        formControlName="nombre" [class.form-control-danger]="nombreFieldIsInvalid"
+                                        [class.form-control-success]="nombreFieldIsValid">
+                                    <small *ngIf="nombreFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="nombreField.hasError('required')">El campo es requerido.</p>
+                                        <p *ngIf="nombreField.hasError('notAvailable')">El nombre no esta disponible</p>
+                                    </small>
+                                    <small *ngIf="nombreFieldIsValid" class="form-control-feedback"> El campo es
+                                        correcto. </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="precioFieldIsInvalid"
+                                    [class.has-success]="precioFieldIsValid">
+                                    <label class="control-label">Precio <span class="text-muted">(en
+                                            soles)</span></label>
+                                    <input type="text" class="form-control"
+                                        [class.form-control-danger]="precioFieldIsInvalid"
+                                        [class.form-control-success]="precioFieldIsValid" placeholder="Precio"
+                                        formControlName="precio">
+                                    <small *ngIf="precioFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="precioField.hasError('required')">El campo es requerido</p>
+                                        <p *ngIf="precioField.hasError('pattern')">Este campo solo acepta numeros</p>
+                                    </small>
+                                    <small *ngIf="precioFieldIsValid" class="form-control-feedback"> El campo es
+                                        correcto.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="vacantesFieldIsInvalid"
+                                    [class.has-success]="vacantesFieldIsValid">
+                                    <label class="control-label">Vacantes</label>
+                                    <input type="text" class="form-control"
+                                        [class.form-control-danger]="vacantesFieldIsInvalid"
+                                        [class.form-control-success]="vacantesFieldIsValid" placeholder="Vacantes"
+                                        formControlName="vacantes">
+                                    <small *ngIf="vacantesFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="vacantesField.hasError('required')">El campo es requerido</p>
+                                        <p *ngIf="vacantesField.hasError('pattern')">Este campo solo acepta numeros</p>
+                                    </small>
+                                    <small *ngIf="vacantesFieldIsValid" class="form-control-feedback"> El campo es
+                                        correcto.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="entrenadorFieldIsInvalid"
+                                    [class.has-success]="entrenadorFieldIsValid">
+                                    <label class="control-label">Entrenador</label>
+                                    <select class="form-control custom-select" formControlName="entrenador">
+                                        <option [ngValue]="undefined">---Seleccionar un entrenador ---</option>
+                                        <option *ngFor="let entrenador of entrenadores" [ngValue]="entrenador">
+                                            {{entrenador.nombre}} - {{entrenador.especialidad.nombre}}</option>
+                                    </select>
+                                    <small *ngIf="entrenadorFieldIsInvalid" class="form-control-feedback">Campo
+                                        requerido</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="fechaInicioFieldIsInvalid"
+                                    [class.has-success]="fechaInicioFieldIsValid">
+                                    <label class="control-label">Fecha de Inicio</label>
+                                    <input type="date" class="form-control" [min]="fechaMinima"
+                                        [class.form-control-danger]="fechaInicioFieldIsInvalid"
+                                        [class.form-control-success]="fechaInicioFieldIsValid"
+                                        formControlName="fechaInicio">
+                                    <small *ngIf="fechaInicioFieldIsInvalid" class="form-control-feedback">
+                                        El campo es requerido
+                                    </small>
+                                    <small *ngIf="fechaInicioFieldIsValid" class="form-control-feedback">
+                                        El campo es correcto
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="fechaFinalFieldIsInvalid"
+                                    [class.has-success]="fechaFinalFieldIsValid">
+                                    <label class="control-label">Fecha Final</label>
+                                    <input type="date" class="form-control" [min]="fechaMinima"
+                                        [class.form-control-danger]="fechaFinalFieldIsInvalid"
+                                        [class.form-control-success]="fechaFinalFieldIsValid"
+                                        formControlName="fechaFinal">
+                                    <small *ngIf="fechaFinalFieldIsInvalid" class="form-control-feedback">
+                                        El campo es requerido
+                                    </small>
+                                    <small *ngIf="fechaFinalFieldIsValid" class="form-control-feedback">
+                                        El campo es correcto
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="horaInicioFieldIsInvalid"
+                                    [class.has-success]="horaInicioFieldIsValid">
+                                    <label class="control-label">Hora de Inicio</label>
+                                    <input type="time" class="form-control"
+                                        [class.form-control-danger]="horaInicioFieldIsInvalid"
+                                        [class.form-control-success]="horaInicioFieldIsValid"
+                                        formControlName="horaInicio">
+                                    <small *ngIf="horaInicioFieldIsInvalid" class="form-control-feedback">
+                                        El campo es requerido
+                                    </small>
+                                    <small *ngIf="horaInicioFieldIsValid" class="form-control-feedback">
+                                        El campo es correcto
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="horaFinalFieldIsInvalid"
+                                    [class.has-success]="horaFinalFieldIsValid">
+                                    <label class="control-label">Hora de Termino</label>
+                                    <input type="time" class="form-control"
+                                        [class.form-control-danger]="horaFinalFieldIsInvalid"
+                                        [class.form-control-success]="horaFinalFieldIsValid"
+                                        formControlName="horaFinal">
+                                    <small *ngIf="horaFinalFieldIsInvalid" class="form-control-feedback">
+                                        El campo es requerido
+                                    </small>
+                                    <small *ngIf="horaFinalFieldIsValid" class="form-control-feedback">
+                                        El campo es correcto
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group" [class.has-danger]="descripcionFieldIsInvalid"
+                                    [class.has-success]="descripcionFieldIsValid">
+                                    <label>Descripcion</label>
+                                    <textarea class="form-control" rows="2"
+                                        [class.form-control-danger]="descripcionFieldIsInvalid"
+                                        [class.form-control-success]="descripcionFieldIsValid" placeholder="Descripcion"
+                                        formControlName="descripcion"></textarea>
+                                    <small *ngIf="descripcionFieldIsInvalid" class="form-control-feedback"> El campo es
+                                        requerido. </small>
+                                    <small *ngIf="descripcionFieldIsValid" class="form-control-feedback"> El campo es
+                                        correcto. </small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-actions pull-right">
+                        <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i> Crear</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

@@ -17,6 +17,10 @@ export class MembershipsService {
     return this.http.get(`${this.urlEndPoint + '/page/' + page}`)
   }
 
+  getMembresiasDisponibles(): Observable<Membresia[]> {
+    return this.http.get<Membresia[]>(`${this.urlEndPoint + '/disponibles'}`);
+  }
+
   create(membresia: Membresia): Observable<Membresia> {
     return this.http.post(this.urlEndPoint, membresia).pipe(
       map((response: any) => response.membresia as Membresia),
@@ -96,4 +100,12 @@ export class MembershipsService {
   getMembresiasAll(): Observable<Membresia[]> {
     return this.http.get<Membresia[]>(`${this.urlEndPoint}`);
   };
+
+  checkName(nombre: string) {
+    return this.http.get(`${this.urlEndPoint}/buscar/${nombre}`);
+  }
+
+  checkVacante(id: number) {
+    return this.http.get(`${this.urlEndPoint}/hora/${id}`);
+  }
 }

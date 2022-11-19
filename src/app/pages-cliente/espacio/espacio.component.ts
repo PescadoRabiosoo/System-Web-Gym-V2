@@ -41,7 +41,7 @@ export class EspacioComponent implements OnInit {
 
     this.authService.obtenerUsuario(this.id).subscribe(response => {
       this.usuarioLogeado = response;
-      console.log(this.usuarioLogeado)
+      console.log(this.usuarioLogeado.compromembresias)
     });
 
     this.buildForm();
@@ -49,6 +49,7 @@ export class EspacioComponent implements OnInit {
     this.imgPerfilService.notificarUpload.subscribe(usuario => {
       this.usuarioLogeado = usuario;
     });
+
   }
 
   public buildForm() {

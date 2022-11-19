@@ -1,0 +1,54 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="addStockService.modal">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}}{{producto.id}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row justify-content-center">
+                    <h6>El stock del producto {{producto.nombre}} es: <span class="font-bold">
+                            {{producto.stock}}
+                        </span></h6>
+                </div>
+
+
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" (click)="cambiarValor(-1)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </span>
+
+                            <input type="number" class="form-control"
+                                [ngClass]="{'is-invalid': progreso > 100 || progreso < 0}" [(ngModel)]="progreso"
+                                (ngModelChange)="onChange($event)">
+
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-primary" (click)="cambiarValor(1)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <button class="btn btn-sm btn-primary waves-effect waves-light m-t-20"
+                        (click)="incrementar(producto)">
+                        Añadir Stock
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

@@ -58,29 +58,8 @@
                                                 <td>
                                                     <span class="image-list m-t-20"
                                                         *ngIf="membresia.clientes.length > 0">
-                                                        <img *ngIf="membresia.clientes[0]?.foto"
-                                                            src="http://localhost:8080/gym/uploads/imgcliente/{{membresia.clientes[0].foto}}"
-                                                            class="img-circle" alt="{{membresia.clientes[0].foto}}"
-                                                            width="30" height="30">
-                                                        <img *ngIf="!membresia.clientes[0]?.foto"
-                                                            src="http://localhost:8080/images/productos/notuser.png"
-                                                            class="img-circle" alt="sin foto" width="30" height="30">
-                                                        <img *ngIf="membresia.clientes[1]?.foto"
-                                                            src="http://localhost:8080/gym/uploads/imgcliente/{{membresia.clientes[1].foto}}"
-                                                            class="img-circle" alt="{{membresia.clientes[1].foto}}"
-                                                            width="30" height="30">
-                                                        <img *ngIf="!membresia.clientes[1]?.foto"
-                                                            src="http://localhost:8080/images/productos/notuser.png"
-                                                            class="img-circle" alt="sin foto" width="30" height="30">
-                                                        <img *ngIf="membresia.clientes[2]?.foto"
-                                                            src="http://localhost:8080/gym/uploads/imgcliente/{{membresia.clientes[2].foto}}"
-                                                            class="img-circle" alt="{{membresia.clientes[2].foto}}"
-                                                            width="30" height="30">
-                                                        <img *ngIf="!membresia.clientes[2]?.foto"
-                                                            src="http://localhost:8080/images/productos/notuser.png"
-                                                            class="img-circle" alt="sin foto" width="30" height="30">
-                                                        <span *ngIf="membresia.clientes.length > 3" class="text-muted">
-                                                            +{{membresia.clientes.length - 3 }} clientes</span>
+                                                        <span class="text-muted">
+                                                            {{membresia.clientes.length}} clientes</span>
                                                     </span>
                                                     <span *ngIf="membresia.clientes.length == 0"
                                                         class="badge bg-warning rounded-pill">

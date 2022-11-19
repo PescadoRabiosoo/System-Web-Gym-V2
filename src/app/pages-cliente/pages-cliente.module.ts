@@ -16,6 +16,10 @@ import { VerCursoComponent } from './espacio/ver-curso/ver-curso.component';
 import { PasarelaPagoComponent } from './pasarela-pago/pasarela-pago.component';
 import { RegistroHorarioComponent } from './membresias/registro-horario/registro-horario.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { FiltroMembresiasPipe } from './membresias/filtro-membresias.pipe';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { FiltroProductosPipe } from './productos/filtro-productos.pipe';
+import { FiltroPresencialesPipe } from './cursos/presenciales/filtro-presenciales.pipe';
 
 
 
@@ -32,7 +36,11 @@ import { NgxMaskModule } from 'ngx-mask';
     VerCompraComponent,
     VerCursoComponent,
     PasarelaPagoComponent,
-    RegistroHorarioComponent
+    RegistroHorarioComponent,
+    FiltroMembresiasPipe,
+    CarritoComprasComponent,
+    FiltroProductosPipe,
+    FiltroPresencialesPipe
   ],
   imports: [
     CommonModule,

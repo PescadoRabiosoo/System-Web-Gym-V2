@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Membresia } from 'src/app/models/membresia.model';
 import { MembershipsService } from 'src/app/services/memberships.service';
 import Swal from 'sweetalert2';
+import { MembreshipValidation } from '../membership-validation';
 import { EditMembershipService } from './edit-membership.service';
 
 @Component({

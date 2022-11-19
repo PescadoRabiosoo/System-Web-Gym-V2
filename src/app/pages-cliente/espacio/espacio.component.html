@@ -30,8 +30,13 @@
                 <h6>{{usuarioLogeado.correo}} </h6>
                 <small class="text-muted p-t-30 db">DNI</small>
                 <h6>{{usuarioLogeado.dni}} </h6>
-                <small class="text-muted p-t-30 db">Membresia</small>
-                <h6>{{usuarioLogeado.membresia.nombre}} </h6>
+                <small class="text-muted p-t-30 db">Membresia <span class="badge badge-warning"
+                        *ngIf="usuarioLogeado.estado == false">Pendiente Pago</span></small>
+                <h6>{{usuarioLogeado.membresia.nombre}}</h6>
+                <small class="text-muted p-t-30 db">Fin de suscripcion </small>
+                <h6 *ngIf="usuarioLogeado.estado == true">{{usuarioLogeado.compromembresias[0].termino | date:"dd '-' MM
+                    '-' yyyy"}}</h6>
+                <h6 *ngIf="usuarioLogeado.estado == false">-</h6>
                 <small class="text-muted p-t-30 db">Horario</small>
                 <h6>{{usuarioLogeado.hora.horaInicio}} - {{usuarioLogeado.hora.horaFinal}} </h6>
             </div>

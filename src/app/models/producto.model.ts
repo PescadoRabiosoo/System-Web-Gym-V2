@@ -6,7 +6,9 @@ export class Producto {
     precio: number;
     stock: number;
     marca: string;
+    descripcion: string;
     foto: string;
+    enabled: Boolean;
     createAt: string;
     tipo: Tipo;
 }

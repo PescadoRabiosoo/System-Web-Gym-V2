@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive" *ngIf="carrito.length>0">
+                    <h4>Productos</h4>
+                    <table class="table table-hover color-table purple-table">
+                        <thead>
+                            <th>N° Item</th>
+                            <th>Producto</th>
+                            <th>Imagen</th>
+                            <th>Cantidad</th>
+                            <th>Precio Und.</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of carrito; let i = index">
+                                <td>
+                                    0{{i+1}}
+                                </td>
+                                <td>
+                                    {{item.producto.nombre}}
+                                </td>
+                                <td>
+                                    <img *ngIf="item.producto?.foto"
+                                        src="http://localhost:8080/gym/uploads/imgproducto/{{item.producto.foto}}"
+                                        alt="{{item.producto.foto}}" class="rounded" width="30">
+                                    <img *ngIf="!item.producto?.foto"
+                                        src="http://localhost:8080/images/productos/notpackage.png" alt="sin foto"
+                                        class="rounded" width="30">
+                                </td>
+                                <td>
+                                    {{item.cantidad}}
+                                </td>
+                                <td>
+                                    S/. {{item.producto.precio}}
+                                </td>
+                                <td>
+                                    S/. {{item.importe}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-responsive" *ngIf="carritoC.length>0">
+                    <h4>Cursos</h4>
+                    <table class="table table-hover color-table purple-table">
+                        <thead>
+                            <th>N° Item</th>
+                            <th>Curso</th>
+                            <th>Imagen</th>
+                            <th>Descripcion</th>
+                            <th>Precio Und.</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of carritoC; let i = index">
+                                <td>
+                                    0{{i+1}}
+                                </td>
+                                <td>
+                                    {{item.curso.nombre}}
+                                </td>
+                                <td>
+                                    <img *ngIf="item.curso?.foto"
+                                        src="http://localhost:8080/gym/uploads/imgcurso/{{item.curso.foto}}"
+                                        alt="{{item.producto.foto}}" class="rounded" width="30">
+                                    <img *ngIf="!item.curso?.foto"
+                                        src="http://localhost:8080/images/productos/notcourse.png" alt="sin foto"
+                                        class="rounded" width="30">
+                                </td>
+                                <td>
+                                    {{item.curso.descripcion}}
+                                </td>
+                                <td>
+                                    S/. {{item.curso.precio}}
+                                </td>
+                                <td>
+                                    S/. {{item.importe}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

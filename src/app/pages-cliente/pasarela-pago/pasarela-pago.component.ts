@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ComprobantesService } from 'src/app/services/comprobantes.service';
 import { HoursService } from 'src/app/services/hours.service';
 import { MembershipsService } from 'src/app/services/memberships.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pasarela-pago',
@@ -84,11 +85,11 @@ export class PasarelaPagoComponent implements OnInit {
 
       if (mesFinal > 12) {
         mesFinal -= 12;
-        fechaFinal.setMonth(mesFinal + 1);
+        fechaFinal.setMonth(mesFinal - 1);
         fechaFinal.setFullYear(anoFinal + 1);
       } else {
-        fechaFinal.setMonth(mesFinal + 1);
-        fechaFinal.setFullYear(anoFinal + 1);
+        fechaFinal.setMonth(mesFinal - 1);
+        fechaFinal.setFullYear(anoFinal);
       }
 
       this.comprobante.termino = fechaFinal;
@@ -101,7 +102,14 @@ export class PasarelaPagoComponent implements OnInit {
       console.log(fechaFinal)
 
       try {
-        this.comprobantesService.create(this.comprobante, this.idm, this.idh).subscribe(res => this.comprobanteres = res);
+        let membresia = this.idm || this.usuario.membresia.id;
+        let hora = this.idh || this.usuario.hora.id;
+        console.log(membresia + hora)
+        console.log(this.comprobante)
+        this.comprobantesService.create(this.comprobante, this.idm == undefined ? this.usuario.membresia.id : this.idm, this.idh == undefined ? this.usuario.hora.id : this.idh).subscribe(res => {
+          this.comprobanteres = res;
+          Swal.fire('Pago realizado', `El Pago se ha realizado correctamente`, `success`)
+        });
         this.router.navigate(['/membresias']);
         console.log(this.comprobanteres)
       } catch (error) {

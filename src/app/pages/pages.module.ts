@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AppRoutingModule } from '../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgChartsModule } from 'ng2-charts';
@@ -30,6 +30,16 @@ import { PaginatorMembershipsComponent } from './memberships/paginator/paginator
 import { AddMembershipComponent } from './memberships/add-membership/add-membership.component';
 import { EditMembershipComponent } from './memberships/edit-membership/edit-membership.component';
 import { FiltroMembershipsPipe } from './memberships/pipes/filtro-memberships.pipe';
+import { AddProductComponent } from './products/add-product/add-product.component';
+import { EditProductComponent } from './products/edit-product/edit-product.component';
+import { AddStockComponent } from './products/add-stock/add-stock.component';
+import { ImgProductComponent } from './products/img-product/img-product.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { PaginatorOnSiteComponent } from './courses/on-site/paginator/paginator-on-site.component';
+import { FiltroOnSitePipe } from './courses/on-site/pipes/filtro-on-site.pipe';
+import { AddOnSiteComponent } from './courses/on-site/add-on-site/add-on-site.component';
+import { EditOnSiteComponent } from './courses/on-site/edit-on-site/edit-on-site.component';
+import { ImgOnSiteComponent } from './courses/on-site/img-on-site/img-on-site.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +67,15 @@ import { FiltroMembershipsPipe } from './memberships/pipes/filtro-memberships.pi
     AddMembershipComponent,
     EditMembershipComponent,
     FiltroMembershipsPipe,
+    AddProductComponent,
+    EditProductComponent,
+    AddStockComponent,
+    ImgProductComponent,
+    PaginatorOnSiteComponent,
+    FiltroOnSitePipe,
+    AddOnSiteComponent,
+    EditOnSiteComponent,
+    ImgOnSiteComponent,
   ],
   imports: [
     CommonModule,
@@ -65,12 +84,14 @@ import { FiltroMembershipsPipe } from './memberships/pipes/filtro-memberships.pi
     FormsModule,
     ComponentsModule,
     NgChartsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     DashboardComponent,
     PagesComponent,
     AccountSettingsComponent,
+  ], providers: [
+    DatePipe
   ]
 })
 export class PagesModule { }

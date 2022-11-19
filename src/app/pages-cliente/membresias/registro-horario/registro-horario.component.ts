@@ -5,6 +5,8 @@ import { HoraDisponible } from 'src/app/models/hora-disponible.model';
 import { Membresia } from 'src/app/models/membresia.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { HoursService } from 'src/app/services/hours.service';
+import { MembershipsService } from 'src/app/services/memberships.service';
+import { MembresiaValidation } from '../membresia-validation';
 import { RegistroHorarioService } from './registro-horario.service';
 
 @Component({
@@ -23,7 +25,8 @@ export class RegistroHorarioComponent implements OnInit {
   constructor(public registroHorarioService: RegistroHorarioService,
     private hoursService: HoursService,
     private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private membershipsService: MembershipsService) {
     this.buildForm();
   }
 
@@ -33,7 +36,7 @@ export class RegistroHorarioComponent implements OnInit {
 
   private buildForm() {
     this.horaForm = this.formBuilder.group({
-      hora: ['', [Validators.required]],
+      hora: ['', [Validators.required], MembresiaValidation.validateVacante(this.membershipsService)],
     })
   }
 

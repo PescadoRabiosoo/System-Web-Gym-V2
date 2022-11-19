@@ -4,3 +4,11 @@
 .cursor {
     cursor: pointer;
 }
+
+.t100 {
+    width: 20rem;
+}
+
+.t50 {
+    width: 15rem;
+}

@@ -1,3 +1,7 @@
+<app-add-product></app-add-product>
+<app-edit-product [producto]="productoSeleccionado"></app-edit-product>
+<app-add-stock [producto]="productoSeleccionado"></app-add-stock>
+<app-img-product [producto]="productoSeleccionado"></app-img-product>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -9,7 +13,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Lista de Productos:</h4>
                                 <div>
-                                    <button class="btn btn-primary pull-left m-b-10">
+                                    <button class="btn btn-primary pull-left m-b-10" (click)="abrirModal()">
                                         <i class="mdi mdi-plus"></i> Nuevo Producto
                                     </button>
                                     <input type="text" class="form-control pull-right m-b-10" style="width: 200px;"
@@ -26,6 +30,7 @@
                                                 <th>Precio</th>
                                                 <th>Stock</th>
                                                 <th>Marca</th>
+                                                <th>Descripcion</th>
                                                 <th>Fecha de Registro</th>
                                                 <th></th>
                                             </tr>
@@ -34,11 +39,11 @@
                                             <tr *ngFor="let producto of productos | filtroProducts:search">
                                                 <td>
                                                     <div class="d-flex">
-                                                        <img *ngIf="producto?.foto"
+                                                        <img *ngIf="producto?.foto" (click)="abrirModalImg(producto)"
                                                             src="http://localhost:8080/gym/uploads/imgproducto/{{producto.foto}}"
                                                             alt="{{producto.foto}}" class="img-thumbail rounded-circle"
                                                             style="width: 65px;height: 65px;">
-                                                        <img *ngIf="!producto?.foto"
+                                                        <img *ngIf="!producto?.foto" (click)="abrirModalImg(producto)"
                                                             src="http://localhost:8080/images/productos/notpackage.png"
                                                             alt="sin foto" class="img-thumbail rounded-circle"
                                                             style="width: 65px;">
@@ -58,25 +63,36 @@
                                                 <td>
                                                     <p class="font-weight-bold">{{producto.marca}}</p>
                                                 </td>
-                                                <td>
+                                                <td class="t100">
+                                                    <p class="text-justify">
+                                                        {{producto.descripcion}}
+                                                    </p>
+                                                </td>
+                                                <td class="t50">
                                                     {{producto.createAt | date:"dd 'de' MMMM 'del' yyyy"}}
                                                 </td>
-                                                <td>
-                                                    <button class="btn btn-outline-primary btn-sm">
+                                                <td class="t100">
+                                                    <button class="btn btn-outline-primary btn-sm"
+                                                        (click)="abrirModalEdit(producto)">
                                                         <i class="mdi mdi-account-edit"></i>
                                                         Editar
                                                     </button>
                                                     &nbsp;
-                                                    <button class="btn btn-outline-primary btn-sm">
+                                                    <button class="btn btn-outline-primary btn-sm"
+                                                        (click)="abrirModalAdd(producto)">
                                                         <i class="mdi mdi-plus"></i>
                                                         Añadir
                                                     </button>
                                                     &nbsp;
-                                                    <button class="btn btn-outline-danger btn-sm">
+                                                    <button *ngIf="producto.enabled == true"
+                                                        class="btn btn-outline-danger btn-sm"
+                                                        (click)="disabled(producto)">
                                                         <i class="mdi mdi-account-off"></i>
                                                         Deshabilitar
                                                     </button>
-                                                    <button *ngIf="!producto" class="btn btn-outline-success btn-sm">
+                                                    <button *ngIf="producto.enabled == false"
+                                                        class="btn btn-outline-success btn-sm"
+                                                        (click)="enabled(producto)">
                                                         <i class="mdi mdi-account"></i>
                                                         Habilitar
                                                     </button>
@@ -87,7 +103,6 @@
 
                                     <app-paginator-products *ngIf="paginador" [paginador]="paginador">
                                     </app-paginator-products>
-
 
                                 </div>
                             </div>

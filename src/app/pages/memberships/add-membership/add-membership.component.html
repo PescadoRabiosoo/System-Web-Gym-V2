@@ -22,8 +22,10 @@
                                         formControlName="nombre" [class.form-control-danger]="nombreFieldIsInvalid"
                                         [class.form-control-success]="nombreFieldIsValid"
                                         onkeydown="return /[a-zA-ZñÑá-úÁ-Ú ]/i.test(event.key)">
-                                    <small *ngIf="nombreFieldIsInvalid" class="form-control-feedback"> El campo es
-                                        requerido. </small>
+                                    <small *ngIf="nombreFieldIsInvalid" class="form-control-feedback">
+                                        <p *ngIf="nombreField.hasError('required')">El campo es requerido.</p>
+                                        <p *ngIf="nombreField.hasError('notAvailable')">El nombre no esta disponible</p>
+                                    </small>
                                     <small *ngIf="nombreFieldIsValid" class="form-control-feedback"> El campo es
                                         correcto. </small>
                                 </div>

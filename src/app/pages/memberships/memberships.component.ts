@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Membresia } from 'src/app/models/membresia.model';
 import { MembershipsService } from 'src/app/services/memberships.service';
 import Swal from 'sweetalert2';
@@ -22,7 +22,8 @@ export class MembershipsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private membershipsService: MembershipsService,
     public addMembershipService: AddMembershipService,
-    public editMembershipService: EditMembershipService) { }
+    public editMembershipService: EditMembershipService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -40,6 +41,7 @@ export class MembershipsComponent implements OnInit {
 
     this.addMembershipService.notificarUpload.subscribe(membresia => {
       this.membresias.push(membresia);
+      return this.membresias;
     });
 
     this.editMembershipService.notificarUpload.subscribe(membresia => {

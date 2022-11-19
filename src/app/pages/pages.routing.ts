@@ -81,7 +81,10 @@ const routes: Routes = [
         canActivate: [AuthGuard, RoleGuard],
         data: { role: 'ROLE_ADMIN' },
         children: [
-            { path: 'on-site', component: OnSiteComponent, data: { titulo: 'Presencial' } },
+            {
+                path: 'on-site', component: OnSiteComponent, data: { titulo: 'Presencial' }
+            },
+            { path: 'on-site/page/:page', component: OnSiteComponent, data: { titulo: 'Presencial' } },
             { path: 'virtual', component: VirtualComponent, data: { titulo: 'Virtual' } },
         ]
     },

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Caracteristica } from 'src/app/models/caracteristica.model';
 import { Membresia } from 'src/app/models/membresia.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MembershipsService } from 'src/app/services/memberships.service';
+import Swal from 'sweetalert2';
 import { RegistroHorarioService } from './registro-horario/registro-horario.service';
 
 @Component({
@@ -16,11 +16,12 @@ export class MembresiasComponent implements OnInit {
 
   membresias: Membresia[];
   paginador: any;
-  caracteristicas: Caracteristica[];
   prueba: string[];
   id: number;
   usuarioComparar: Usuario;
   membresiaSeleccionada: Membresia;
+  pages: number = 0;
+  restante: number = 0;
 
   constructor(private activatedRoute: ActivatedRoute,
     private membershipsService: MembershipsService,
@@ -29,7 +30,7 @@ export class MembresiasComponent implements OnInit {
     public registroHorarioService: RegistroHorarioService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
+    /*this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
 
       if (!page) {
@@ -43,9 +44,19 @@ export class MembresiasComponent implements OnInit {
             this.paginador = response;
             this.caracteristicas = response.content.map(res => res.descripcion.split(';'));
             console.log(this.caracteristicas);
+            console.log(response.content)
           }
         )
-    });
+    });*/
+
+    this.membershipsService.getMembresiasDisponibles().subscribe(
+      response => {
+        this.membresias = response;
+        this.restante = this.membresias.length;
+        console.log(this.membresias)
+        console.log(response.map((res: any) => res.descripcion.split(';')))
+      }
+    )
 
     this.id = JSON.parse(sessionStorage.getItem('usuario')).id;
 
@@ -56,12 +67,33 @@ export class MembresiasComponent implements OnInit {
   }
 
   suscribirse(membresia: Membresia) {
-    this.membresiaSeleccionada = membresia;
-    this.registroHorarioService.abrirModal();
+    if (this.usuarioComparar.estado == false) {
+      this.membresiaSeleccionada = membresia;
+      this.registroHorarioService.abrirModal();
+    } else {
+      Swal.fire('Info', `Ud. cuenta con una suscripcion, no puede continuar`, `info`)
+    }
   }
 
   pagar() {
     this.router.navigate(['/pago']);
   }
 
+  renovar() {
+    if (this.usuarioComparar.compromembresias) {
+      Swal.fire('Info', `Su suscripcion actual aun no ha caducado, no puede continuar`, `info`)
+    }
+  }
+
+  anterior() {
+    if (this.pages > 0)
+      this.pages -= 3;
+  }
+
+  siguiente() {
+    if (this.pages < this.restante) {
+      this.restante -= 3;
+      this.pages += 3;
+    }
+  }
 }

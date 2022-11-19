@@ -6,6 +6,8 @@ export class CursoPresencial {
     precio: number;
     vacantes: number;
     descripcion: string;
+    foto: string;
+    enabled: Boolean;
     fechaInicio: string;
     fechaFinal: string;
     horaInicio: string;

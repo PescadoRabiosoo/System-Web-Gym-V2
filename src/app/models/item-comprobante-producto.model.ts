@@ -6,7 +6,7 @@ export class ItemComprobanteProducto {
     cantidad: number = 1;
     importe: number;
 
-    public calcularImporte(): number {
+    calcularImporte(): number {
         return this.cantidad * this.producto.precio;
     }
 }

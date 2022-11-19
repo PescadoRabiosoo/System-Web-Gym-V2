@@ -33,4 +33,17 @@ export class ConfiguracionesService {
 
     });
   }
+
+  changeActive(id: number) {
+    const categoriaLinks = document.querySelectorAll('.list-group-item');
+    categoriaLinks.forEach(elem => {
+      elem.classList.remove('active');
+    })
+    if (id == 0) {
+      categoriaLinks[0].classList.add('active');
+    } else {
+      const boton = document.getElementsByClassName(`${id}`);
+      boton[0].classList.add('active');
+    }
+  }
 }

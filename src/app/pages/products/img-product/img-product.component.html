@@ -1,0 +1,63 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="imgProductService.modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}} {{producto.nombre}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-body">
+                        <h3 class="card-title"></h3>
+                        <hr>
+                        <div class="row justify-content-center m-b-3">
+                            <div class="col-6">
+                                <fieldset class="form-group">
+                                    <label class="custom-file d-block">
+                                        <input (change)="seleccionarFoto($event)" type="file" id="file"
+                                            class="custom-file-input">
+                                        <span class="custom-file-control"></span>
+                                    </label>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center m-b-5">
+                            <img *ngIf="!previsualizacion && producto?.foto"
+                                src="http://localhost:8080/gym/uploads/imgcliente/{{producto.foto}}"
+                                alt="{{producto.foto}}" class="img-circle" style="width: 25rem;height: 25rem;">
+                            <img *ngIf="previsualizacion" [src]="previsualizacion" alt="" class="img-circle"
+                                style="width: 25rem;height: 25rem;">
+                            <img *ngIf="!previsualizacion && !producto?.foto"
+                                src="http://localhost:8080/images/productos/notpackage.png" class="img-circle"
+                                style="width: 25rem;height: 25rem;">
+                        </div>
+                        <div class="row justify-content-center m-b-5 m-t-5">
+                            <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-primary"
+                                type="button" id="inputGroupFileAddon03">
+                                Subir
+                            </button>
+                        </div>
+                        <div class="row justify-content-center m-b-3">
+                            <div *ngIf="progreso>0" class="progress col-12">
+                                <div class="progress-bar bg-primary progress-bar-striped" role="progressbar"
+                                    attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100"
+                                    [ngStyle]="{width: progreso+'%'}">
+                                    {{progreso}}% Completado
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

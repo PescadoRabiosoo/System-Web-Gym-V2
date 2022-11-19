@@ -33,6 +33,14 @@ export class ProductsService {
     );
   };
 
+  getProductosDisponibles(): Observable<any> {
+    return this.http.get(`${this.urlEndPoint}/disponibles`);
+  }
+
+  getProductosTipo(id: number): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.urlEndPoint}/tipo/${id}`);
+  }
+
   create(producto: Producto): Observable<Producto> {
     return this.http.post(this.urlEndPoint, producto).pipe(
       map((response: any) => response.producto as Producto),
@@ -100,5 +108,36 @@ export class ProductsService {
 
   getProductosAll(): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.urlEndPoint}`)
+  }
+
+  addStock(producto: Producto, stock: number, id: number) {
+    return this.http.put(`${this.urlEndPoint}/${stock}/${id}`, producto).pipe(catchError(e => {
+      if (e.error.mensaje) {
+        console.log(e.error.mensaje);
+      }
+      return throwError(() => e);
+    }));
+  }
+
+  disabled(id: number) {
+    return this.http.delete(`${this.urlEndPoint}/deshabilitar/${id}`).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(() => e);
+      })
+    )
+  }
+
+  enabled(id: number) {
+    return this.http.delete(`${this.urlEndPoint}/habilitar/${id}`).pipe(
+      catchError(e => {
+        if (e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(() => e);
+      })
+    )
   }
 }

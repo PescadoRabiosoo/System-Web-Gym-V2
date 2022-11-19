@@ -1,9 +1,10 @@
 <div class="row justify-content-end m-r-5 bg">
-    <input type="text" class="form-control m-b-10" style="width: 200px;" placeholder="Buscar por nombre">
+    <input type="text" class="form-control m-b-10" style="width: 200px;" placeholder="Buscar por nombre" #txtSearch
+        (keyup)="btnSearchCurso(txtSearch.value)">
 </div>
 
 <div class="row">
-    <div class="col-3" *ngFor="let presencial of presenciales">
+    <div class="col-3" *ngFor="let presencial of presenciales | filtroPresenciales:pages:search">
         <div class="card">
             <img *ngIf="presencial?.foto" src="http://localhost:8080/gym/uploads/imgcursopresencial/{{presencial.foto}}"
                 alt="{{presencial.foto}}" class="card-img-top">
@@ -50,18 +51,35 @@
                 <p class="text-uppercase text-muted font-bold small">
                     Entrenador
                 </p>
-                <div class="d-flex align-items-center">
-                    <img src="http://localhost:8080/images/productos/nottrainer.png" alt=""
-                        style="width:45px; height:45px" class="rounded-circle">
 
-                    <div class="m-l-5">
-                        <p class="font-bold m-b-5">{{presencial.entrenador.nombre}} {{presencial.entrenador.apellido}}
-                        </p>
-                        <p class="text-muted m-b-0">{{presencial.entrenador.especialidad.nombre}}</p>
+                <div class="row">
+                    <div class=" col-9 d-flex align-items-center">
+                        <img src="http://localhost:8080/images/productos/nottrainer.png" alt=""
+                            style="width:45px; height:45px" class="rounded-circle">
+
+                        <div class="m-l-5">
+                            <p class="font-bold m-b-5">{{presencial.entrenador.nombre}}
+                                {{presencial.entrenador.apellido}}
+                            </p>
+                            <p class="text-muted m-b-0">{{presencial.entrenador.especialidad.nombre}}</p>
+                        </div>
                     </div>
-
+                    <div class="col-3 text-right">
+                        <a (click)="addCart(presencial)">
+                            <i class="mdi mdi-cart-plus"></i>
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
+</div>
+
+<div class="text-center" *ngIf="search == ''">
+    <button class="btn btn-outline-primary waves-effect waves-light" (click)="anterior()">Anterior</button>
+    <button class="btn btn-outline-primary waves-effect waves-light" *ngFor="let pag of paginas" (click)="codigo(pag)">
+        {{pag}}
+    </button>
+    <button class="btn btn-outline-primary waves-effect waves-light" (click)="siguiente()">Siguiente</button>
 </div>
