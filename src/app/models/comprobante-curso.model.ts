@@ -7,6 +7,7 @@ export class ComprobanteCurso {
     cliente: Cliente;
     items: Array<ItemComprobanteCurso> = [];
     total: number;
+    mes: string;
 
     calcularGranTotal(): number {
         this.total = 0;

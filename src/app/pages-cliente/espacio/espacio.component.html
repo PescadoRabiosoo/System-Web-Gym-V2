@@ -83,7 +83,7 @@
                                     <td>
                                         {{comprobantes.id}}
                                     </td>
-                                    <td>
+                                    <td class="t100">
                                         {{comprobantes.descripcion}}
                                     </td>
                                     <td>
@@ -128,7 +128,7 @@
                 <div class="tab-pane" id="profile" role="tabpanel">
                     <div class="card-body">
                         <table class="table table-hover color-table purple-table"
-                            *ngIf="usuarioLogeado.cursos.length>0">
+                            *ngIf="usuarioLogeado.comprocursos.length>0">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -140,7 +140,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let curso of usuarioLogeado.cursos">
+                                <tr *ngFor="let curso of cursos">
                                     <td>
                                         {{curso.id}}
                                     </td>
@@ -148,27 +148,13 @@
                                         {{curso.nombre}}
                                     </td>
                                     <td>
-                                        S/. {{curso.precio}}
+                                        S/. {{curso.precio | number:"2.2"}}
                                     </td>
                                     <td>
                                         {{curso.descripcion}}
                                     </td>
                                     <td>
-                                        <div class="d-flex">
-                                            <img *ngIf="curso.entrenador?.foto"
-                                                src="http://localhost:8080/gym/uploads/imgentrenador/{{curso.entrenador.foto}}"
-                                                alt="{{curso.entrenador.nombre}}" class="img-circle img-fluid"
-                                                style="width: 60px; height: 70px;">
-                                            <img *ngIf="!curso.entrenador?.foto"
-                                                src="http://localhost:8080/images/productos/nottrainer.png"
-                                                alt="sin foto" class="img-circle img-fluid"
-                                                style="width: 60px; height: 70px;">
-                                            <div class="ml-3">
-                                                <p class="font-bold m-b-1">{{curso.entrenador.nombre}}
-                                                    {{curso.entrenador.apellido}}</p>
-                                                <p class="text-muted m-b-3">{{curso.entrenador.especialidad.nombre}}</p>
-                                            </div>
-                                        </div>
+                                        {{curso.entrenador.nombre}}
                                     </td>
                                     <td>
                                         <button class="btn btn-outline-primary btn-sm" (click)="abrirCurso(curso)">
@@ -179,7 +165,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div *ngIf="usuarioLogeado.cursos.length==0" class="alert alert-primary">
+                        <div *ngIf="usuarioLogeado.comprocursos.length==0" class="alert alert-primary">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>

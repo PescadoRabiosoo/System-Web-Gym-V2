@@ -29,13 +29,14 @@ export class SidebarService {
       icono: 'mdi mdi-dumbbell',
       url: '/products',
       submenu: []
-    },
+    }
+    /*,
     {
       titulo: 'Entrenadores',
       icono: 'mdi mdi-human-handsup',
       url: '/trainers',
       submenu: []
-    },
+    }*/,
     {
       titulo: 'Cursos',
       icono: 'mdi mdi-book-multiple',
@@ -44,11 +45,12 @@ export class SidebarService {
         {
           titulo: 'Presencial',
           url: 'on-site',
-        },
+        }
+        /*,
         {
           titulo: 'Virtual',
           url: 'virtual',
-        }
+        }*/
       ]
     },
 

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { HoraDisponible } from 'src/app/models/hora-disponible.model';
 import { Membresia } from 'src/app/models/membresia.model';
 import { Usuario } from 'src/app/models/usuario.model';
+import { CustomersService } from 'src/app/services/customers.service';
 import { HoursService } from 'src/app/services/hours.service';
 import { MembershipsService } from 'src/app/services/memberships.service';
 import { MembresiaValidation } from '../membresia-validation';
@@ -26,7 +27,8 @@ export class RegistroHorarioComponent implements OnInit {
     private hoursService: HoursService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private membershipsService: MembershipsService) {
+    private membershipsService: MembershipsService,
+    private customersService: CustomersService) {
     this.buildForm();
   }
 
@@ -44,7 +46,12 @@ export class RegistroHorarioComponent implements OnInit {
     event.preventDefault();
     if (this.horaForm.valid) {
       const value = this.horaForm.value;
-      console.log(value.hora.id);
+      console.log(value);
+      console.log(this.usuario)
+      this.usuario.hora = value.hora;
+      this.usuario.membresia = this.membresia;
+      console.log(this.usuario)
+      this.customersService.update(this.usuario).subscribe(data => console.log(data));
       this.router.navigate([`${'/pago/membresia/' + this.membresia.id + '/' + value.hora.id}`])
       this.cerrarModal();
     } else {

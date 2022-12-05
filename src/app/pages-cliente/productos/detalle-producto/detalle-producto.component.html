@@ -1,0 +1,67 @@
+<!-- sample modal content -->
+<div class="abrir-modal fadeIn animacion" *ngIf="detalleProductoService.modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    <i class="mdi mdi-account-multiple-plus"></i> {{titulo}}{{producto.id}}
+                </h4>
+                <button type="button" class="close" (click)="cerrarModal()">×</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-5">
+                        <img *ngIf="producto?.foto"
+                            src="http://localhost:8080/gym/uploads/imgproducto/{{producto.foto}}"
+                            alt="{{producto.foto}}" class="rounded" width="100%">
+                        <img *ngIf="!producto?.foto" src="http://localhost:8080/images/productos/notpackage.png"
+                            alt="sin foto" class="rounded" width="100%">
+                    </div>
+                    <div class="col-7">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="m-t-20">{{producto.nombre | slice:0:20}}</h5>
+                                <div class="m-t-5 info">
+                                    <span class="text1 d-block text-muted">
+                                        {{producto.tipo.nombre}}
+                                    </span>
+                                    <span class="text1 text-muted">
+                                        {{producto.marca}}
+                                    </span>
+                                </div>
+                                <div class="cost m-t-5 text-dark">
+                                    <span>S/. {{producto.precio}}</span>
+                                </div>
+                                <p>
+                                    {{producto.stock}}
+                                </p>
+                                <p>
+                                    {{producto.descripcion}}
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <button class="btn btn-primary btn-sm waves-effect waves-light" (click)="comprar(producto)">
+                                Comprar
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" (click)="addCart(producto)">
+                                <i class="mdi mdi-plus"></i>
+                                <i class="mdi mdi-cart"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

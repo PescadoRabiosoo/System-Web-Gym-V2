@@ -68,15 +68,11 @@
 
                 <h3>Monto del Pedido</h3>
 
-                <table class="table v-middle no-border">
+                <table class="table v-middle no-border" *ngIf="membresia">
                     <tbody>
                         <tr>
                             <td class="font-bold">SubTotal:</td>
                             <td class="right">S/. {{membresia.precio}}</td>
-                        </tr>
-                        <tr>
-                            <td class="font-bold">Impuesto(18%):</td>
-                            <td class="right">S/. {{membresia.precio*0.18}}</td>
                         </tr>
                         <tr>
                             <td class="font-bold">Descuento:</td>
@@ -86,6 +82,23 @@
                         <tr>
                             <td class="font-bold">Total a pagar:</td>
                             <td class="right">S/. {{total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table v-middle no-border" *ngIf="!membresia">
+                    <tbody>
+                        <tr>
+                            <td class="font-bold">SubTotal:</td>
+                            <td class="right">S/. {{subtotal}} </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Descuento:</td>
+                            <td class="right">S/. 0.00</td>
+                        </tr>
+                        <hr>
+                        <tr>
+                            <td class="font-bold">Total a pagar:</td>
+                            <td class="right">S/. {{subtotal}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -144,6 +157,70 @@
 
                 <h3>Pedido</h3>
 
+                <div class="table-responsive">
+                    <table class="table table-hover color-table purple-table">
+                        <thead>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Imagen</th>
+                            <th>Cantidad</th>
+                            <th>Precio Und.</th>
+                            <th>Total</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of carrito">
+                                <td>
+                                    {{item.producto.id}}
+                                </td>
+                                <td>
+                                    {{item.producto.nombre}}
+                                </td>
+                                <td>
+                                    <img *ngIf="item.producto?.foto"
+                                        src="http://localhost:8080/gym/uploads/imgproducto/{{item.producto.foto}}"
+                                        alt="{{item.producto.foto}}" class="rounded" width="30">
+                                    <img *ngIf="!item.producto?.foto"
+                                        src="http://localhost:8080/images/productos/notpackage.png" alt="sin foto"
+                                        class="rounded" width="30">
+                                </td>
+                                <td>
+                                    {{item.cantidad}}
+                                </td>
+                                <td>
+                                    S/. {{item.producto.precio}}
+                                </td>
+                                <td>
+                                    S/. {{item.importe}}
+                                </td>
+                            </tr>
+                            <tr *ngFor="let itemc of carritoC">
+                                <td>
+                                    {{itemc.curso.id}}
+                                </td>
+                                <td>
+                                    {{itemc.curso.nombre}}
+                                </td>
+                                <td>
+                                    <img *ngIf="itemc.curso?.foto"
+                                        src="http://localhost:8080/gym/uploads/imgcursopresencial/{{itemc.curso.foto}}"
+                                        alt="{{itemc.curso.foto}}" class="rounded" width="30">
+                                    <img *ngIf="!itemc.curso?.foto"
+                                        src="http://localhost:8080/images/productos/notcourse.png" alt="sin foto"
+                                        class="rounded" width="30">
+                                </td>
+                                <td>
+                                    1
+                                </td>
+                                <td>
+                                    S/. {{itemc.curso.precio}}
+                                </td>
+                                <td>
+                                    S/. {{itemc.importe}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
         </div>

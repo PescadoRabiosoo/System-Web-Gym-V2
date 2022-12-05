@@ -22,6 +22,8 @@ export class CustomersComponent implements OnInit {
   search: string = '';
   pages: number = 0;
 
+  public cargando: Boolean = true;
+
   constructor(private activatedRoute: ActivatedRoute,
     private customersService: CustomersService,
     public authService: AuthService,
@@ -67,6 +69,10 @@ export class CustomersComponent implements OnInit {
         return clienteOriginal;
       });
     });
+
+    setTimeout(() => {
+      this.cargando = false;
+    }, 2000);
   }
 
   disabled(cliente: Cliente) {

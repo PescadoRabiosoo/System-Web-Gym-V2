@@ -20,6 +20,7 @@ import { FiltroMembresiasPipe } from './membresias/filtro-membresias.pipe';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 import { FiltroProductosPipe } from './productos/filtro-productos.pipe';
 import { FiltroPresencialesPipe } from './cursos/presenciales/filtro-presenciales.pipe';
+import { DetalleProductoComponent } from './productos/detalle-producto/detalle-producto.component';
 
 
 
@@ -40,7 +41,8 @@ import { FiltroPresencialesPipe } from './cursos/presenciales/filtro-presenciale
     FiltroMembresiasPipe,
     CarritoComprasComponent,
     FiltroProductosPipe,
-    FiltroPresencialesPipe
+    FiltroPresencialesPipe,
+    DetalleProductoComponent
   ],
   imports: [
     CommonModule,

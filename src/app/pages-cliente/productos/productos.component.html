@@ -1,3 +1,5 @@
+<app-detalle-producto [producto]="productoSeleccionado"></app-detalle-producto>
+
 <div class="row justify-content-end m-r-20 m-b-20">
     <input type="text" class="form-control" style="width: 200px;" placeholder="Buscar por nombre" #txtSearch
         (keyup)="btnSearchProducto(txtSearch.value)">
@@ -10,12 +12,13 @@
             <div class="col-3" *ngFor="let producto of productos | filtroProductos:pages:search">
                 <div class="card m-t-5 muevete">
                     <div class="product align-items-center p-2 text-center">
-                        <img *ngIf="producto?.foto"
+                        <img *ngIf="producto?.foto" (click)="abrirModal(producto)"
                             src="http://localhost:8080/gym/uploads/imgproducto/{{producto.foto}}"
-                            alt="{{producto.foto}}" class="rounded" width="150">
-                        <img *ngIf="!producto?.foto" src="http://localhost:8080/images/productos/notpackage.png"
-                            alt="sin foto" class="rounded" width="150">
-                        <h5 class="m-t-20">{{producto.nombre}}</h5>
+                            alt="{{producto.foto}}" class="rounded producto" width="150" style="cursor: pointer;">
+                        <img *ngIf="!producto?.foto" (click)="abrirModal(producto)"
+                            src="http://localhost:8080/images/productos/notpackage.png" alt="sin foto"
+                            class="rounded producto" width="150" style="cursor: pointer;">
+                        <h5 class="m-t-20">{{producto.nombre | slice:0:20}}</h5>
                         <div class="m-t-5 info">
                             <span class="text1 d-block text-muted">
                                 {{producto.tipo.nombre}}
@@ -25,7 +28,7 @@
                             </span>
                         </div>
                         <div class="cost m-t-5 text-dark">
-                            <span>S/. {{producto.precio}}</span>
+                            <span>S/. {{producto.precio | number:"2.2"}}</span>
                         </div>
                     </div>
                     <div class="p-3 shoe text-center text-white m-t-5 cursor bg-primary">
@@ -47,10 +50,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="list-group">
-                    <a (click)="all()" class="list-group-item active">Todos</a>
-                    <a (click)="categoria(1)" class="list-group-item 1">Proteinas</a>
-                    <a (click)="categoria(2)" class="list-group-item 2">Equipos</a>
-                    <a (click)="categoria(3)" class="list-group-item 3">Pesas</a>
+                    <a (click)="all()" class="list-group-item active" style="cursor: pointer;">Todos</a>
+                    <a (click)="categoria(1)" class="list-group-item 1" style="cursor: pointer;">Proteinas</a>
+                    <a (click)="categoria(2)" class="list-group-item 2" style="cursor: pointer;">Equipos</a>
+                    <a (click)="categoria(3)" class="list-group-item 3" style="cursor: pointer;">Pesas</a>
                 </div>
             </div>
         </div>

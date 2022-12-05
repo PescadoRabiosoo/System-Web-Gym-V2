@@ -3,12 +3,13 @@ import { ItemComprobanteProducto } from "./item-comprobante-producto.model";
 
 export class ComprobanteProducto {
     id: number;
-    comprobante: string;
+    descripcion: string;
     observacion: string;
     createAt: Date;
     cliente: Cliente;
     items: Array<ItemComprobanteProducto> = [];
     total: number;
+    mes: string;
 
     calcularGranTotal(): number {
         this.total = 0;

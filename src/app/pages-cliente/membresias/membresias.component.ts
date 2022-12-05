@@ -23,6 +23,8 @@ export class MembresiasComponent implements OnInit {
   pages: number = 0;
   restante: number = 0;
 
+  public cargando: Boolean = true;
+
   constructor(private activatedRoute: ActivatedRoute,
     private membershipsService: MembershipsService,
     private authService: AuthService,
@@ -64,6 +66,9 @@ export class MembresiasComponent implements OnInit {
       this.usuarioComparar = response as Usuario;
     });
 
+    setTimeout(() => {
+      this.cargando = false;
+    }, 3000);
   }
 
   suscribirse(membresia: Membresia) {
@@ -76,7 +81,8 @@ export class MembresiasComponent implements OnInit {
   }
 
   pagar() {
-    this.router.navigate(['/pago']);
+    let param = 'user'
+    this.router.navigate([`${'/pago/membresia/' + param}`]);
   }
 
   renovar() {

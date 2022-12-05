@@ -1,12 +1,6 @@
-<div class="card">
-    <div class="card-body">
+<div style="display: block">
+    <canvas baseChart [data]="doughnutChartData" type="doughnut">
+    </canvas>
 
-        <h3>{{title}}</h3>
-
-        <div style="display: block">
-            <canvas baseChart [data]="doughnutChartData" type="doughnut">
-            </canvas>
-        </div>
-
-    </div>
+    <button class="btn btn-sm btn-primary" (click)="cargar()">Cargar</button>
 </div>

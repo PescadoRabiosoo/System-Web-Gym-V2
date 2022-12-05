@@ -19,11 +19,12 @@ export class MembershipsComponent implements OnInit {
   membresiaSeleccionada: Membresia;
   search: string = '';
 
+  public cargando: Boolean = true;
+
   constructor(private activatedRoute: ActivatedRoute,
     private membershipsService: MembershipsService,
     public addMembershipService: AddMembershipService,
-    public editMembershipService: EditMembershipService,
-    private router: Router) { }
+    public editMembershipService: EditMembershipService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -52,6 +53,9 @@ export class MembershipsComponent implements OnInit {
         return membresiaOriginal;
       });
     });
+    setTimeout(() => {
+      this.cargando = false;
+    }, 2000);
   }
 
   disabled(membresia: Membresia) {

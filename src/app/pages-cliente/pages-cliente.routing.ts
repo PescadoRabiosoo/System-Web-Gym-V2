@@ -67,7 +67,8 @@ const routes: Routes = [
         children: [
             { path: '', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
             { path: 'membresia/:membresia/:id', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
-            { path: ':id', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
+            { path: 'membresia/:user', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
+            { path: 'carrito', component: PasarelaPagoComponent, data: { titulo: 'Pagar' } },
         ]
     },
     {

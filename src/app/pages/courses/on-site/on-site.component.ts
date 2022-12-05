@@ -20,6 +20,8 @@ export class OnSiteComponent implements OnInit {
   paginador: any;
   search: string = '';
 
+  public cargando: Boolean = true;
+
   constructor(private onSiteService: OnSiteService,
     private activatedRoute: ActivatedRoute,
     private addOnSiteService: AddOnSiteService,
@@ -60,6 +62,9 @@ export class OnSiteComponent implements OnInit {
         return cursoOriginal;
       });
     });
+    setTimeout(() => {
+      this.cargando = false;
+    }, 2000);
   }
 
   btnSearchCurso(search: string) {

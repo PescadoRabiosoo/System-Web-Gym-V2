@@ -1,3 +1,4 @@
+import { ComprobanteCurso } from "./comprobante-curso.model";
 import { ComprobanteMembresia } from "./comprobante-membresia.model";
 import { ComprobanteProducto } from "./comprobante-producto.model";
 import { HoraDisponible } from "./hora-disponible.model";
@@ -18,6 +19,7 @@ export class Usuario {
     membresia: Membresia;
     hora: HoraDisponible;
     comprobantes: Array<ComprobanteProducto> = []
+    comprocursos: Array<ComprobanteCurso> = []
     roles: string[] = [];
     cursos: string[] = [];
     compromembresias: Array<ComprobanteMembresia> = []

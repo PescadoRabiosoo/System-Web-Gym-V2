@@ -7,23 +7,24 @@
     <div class="col-3" *ngFor="let presencial of presenciales | filtroPresenciales:pages:search">
         <div class="card">
             <img *ngIf="presencial?.foto" src="http://localhost:8080/gym/uploads/imgcursopresencial/{{presencial.foto}}"
-                alt="{{presencial.foto}}" class="card-img-top">
+                alt="{{presencial.foto}}" class="card-img-top curso">
             <img *ngIf="!presencial?.foto" src="http://localhost:8080/images/productos/notcourse.png" alt="sin foto"
-                class="card-img-top">
+                class="card-img-top curso">
             <div class="card-body p-b-5">
                 <p class="font-bold text-muted text-uppercase m-b-5">
                     {{presencial.nombre}}
                 </p>
                 <p class="font-bold h3 m-b-5">
-                    S/. {{presencial.precio}}
+                    S/. {{presencial.precio | number:"2.2"}}
                 </p>
                 <p class="text-muted">
                     {{presencial.vacantes}} vacantes
                 </p>
-                <p class="m-t-5 m-b-0">
+                <p class="m-t-5 m-b-0" style="height: 10rem;">
                     {{presencial.descripcion}}
                 </p>
             </div>
+
             <hr>
             <div class="card-body d-flex justify-content-around p-t-5">
                 <span>
@@ -59,13 +60,13 @@
 
                         <div class="m-l-5">
                             <p class="font-bold m-b-5">{{presencial.entrenador.nombre}}
-                                {{presencial.entrenador.apellido}}
+                                {{presencial.entrenador.apellido | slice:0:12}}
                             </p>
                             <p class="text-muted m-b-0">{{presencial.entrenador.especialidad.nombre}}</p>
                         </div>
                     </div>
                     <div class="col-3 text-right">
-                        <a (click)="addCart(presencial)">
+                        <a (click)="addCart(presencial)" class="cursor">
                             <i class="mdi mdi-cart-plus"></i>
                         </a>
                     </div>

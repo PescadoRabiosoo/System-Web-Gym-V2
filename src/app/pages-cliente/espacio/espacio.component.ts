@@ -25,6 +25,7 @@ export class EspacioComponent implements OnInit {
   apellido: string;
   telefono: number;
   editForm: FormGroup;
+  cursos = [];
 
   comprobanteSeleccionada: ComprobanteProducto;
   cursoSeleccionado: CursoPresencial;
@@ -41,7 +42,13 @@ export class EspacioComponent implements OnInit {
 
     this.authService.obtenerUsuario(this.id).subscribe(response => {
       this.usuarioLogeado = response;
-      console.log(this.usuarioLogeado.compromembresias)
+      console.log(this.usuarioLogeado.comprocursos)
+      response.comprocursos.map(ele => {
+        ele.items.map(item => {
+          this.cursos.push(item.curso);
+        })
+      })
+      console.log(this.cursos)
     });
 
     this.buildForm();

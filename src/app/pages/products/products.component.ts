@@ -21,6 +21,8 @@ export class ProductsComponent implements OnInit {
   productoSeleccionado: Producto;
   search: string = '';
 
+  public cargando: Boolean = true;
+
   constructor(private productsService: ProductsService,
     private activatedRoute: ActivatedRoute,
     private addProductService: AddProductService,
@@ -29,6 +31,7 @@ export class ProductsComponent implements OnInit {
     private imgProductService: ImgProductService) { }
 
   ngOnInit(): void {
+
     this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
       if (!page) {
@@ -71,6 +74,10 @@ export class ProductsComponent implements OnInit {
         return productoOriginal;
       });
     });
+
+    setTimeout(() => {
+      this.cargando = false;
+    }, 2000);
   }
 
   btnSearchProducto(search: string) {

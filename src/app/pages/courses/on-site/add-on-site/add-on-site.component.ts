@@ -61,16 +61,23 @@ export class AddOnSiteComponent implements OnInit {
     if (this.crearForm.valid) {
       const value = this.crearForm.value as CursoPresencial;
       console.log(value);
-      this.onSiteService.create(value).subscribe(
+      this.onSiteService.prueba(value).subscribe(
         curso => {
+          console.log(curso)
           this.addOnSiteService.notificarUpload.emit(curso);
           Swal.fire('Nuevo Curso', `El curso ${curso.nombre} se ha creado correctamente`, `success`)
           this.cerrarModal();
         },
         err => {
-          this.errores = err.error.errors as string[];
-          console.error("Codigo del error desde el backend: " + err.status);
-          console.error(err.error.errors);
+          console.log(err);
+          if (!err.error.mensaje) {
+            this.errores = err.error.errors as string[];
+            console.error("Codigo del error desde el backend: " + err.status);
+            console.error(err.error.errors);
+          } else {
+            console.log(err.error.mensaje)
+            Swal.fire('Cruce', 'El curso no se puede registrar debido a que tiene cruce con otro curso', 'error');
+          }
         }
       )
     } else {

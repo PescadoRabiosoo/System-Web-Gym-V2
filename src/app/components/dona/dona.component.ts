@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { ChartData, Color } from 'chart.js';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChartData } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-dona',
@@ -7,9 +8,9 @@ import { ChartData, Color } from 'chart.js';
   styles: [
   ]
 })
-export class DonaComponent {
+export class DonaComponent implements OnInit {
 
-  @Input() title: string = 'Sin titulo';
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
 
   @Input('labels') doughnutChartLabels: string[] = ['Label1', 'Label2', 'Label3'];
 
@@ -24,5 +25,12 @@ export class DonaComponent {
   };
 
   constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  cargar() {
+    this.chart.update();
+  }
 
 }

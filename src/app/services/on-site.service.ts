@@ -64,6 +64,27 @@ export class OnSiteService {
     )
   };
 
+  prueba(onSite: CursoPresencial): Observable<CursoPresencial> {
+    return this.http.post(this.urlEndPoint + '/prueba', onSite).pipe(
+      map((response: any) => response.cursopresencial as CursoPresencial),
+      catchError(e => {
+        if (e.status == 400) {
+          return throwError(() => e);
+        }
+
+        if (e.mensaje) {
+          console.log(e.mensaje);
+        }
+
+        if (e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+
+        return throwError(() => e);
+      })
+    )
+  };
+
   update(onSite: CursoPresencial): Observable<any> {
     return this.http.put<any>(`${this.urlEndPoint}/${onSite.id}`, onSite).pipe(
       catchError(e => {

@@ -23,13 +23,14 @@ export class NavsideService {
       icono: 'mdi mdi-book-multiple',
       url: '/presenciales',
       submenu: []
-    },
+    }
+    /*,
     {
       titulo: 'Cursos Virtuales',
       icono: 'mdi mdi-television',
       url: '/virtuales',
       submenu: []
-    }
+    }*/
   ]
   constructor() { }
 }

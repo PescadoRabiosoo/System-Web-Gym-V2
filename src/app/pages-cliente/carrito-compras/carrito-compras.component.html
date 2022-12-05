@@ -12,6 +12,7 @@
                             <th>Cantidad</th>
                             <th>Precio Und.</th>
                             <th>Total</th>
+                            <th>Quitar</th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of carrito; let i = index">
@@ -30,13 +31,19 @@
                                         class="rounded" width="30">
                                 </td>
                                 <td>
-                                    {{item.cantidad}}
+                                    <input type="number" value="{{item.cantidad}}" class="form-control col-sm-2"
+                                        (change)="actualizarCantidad(item, $event)" style="width: 300px;" #cantidad>
                                 </td>
                                 <td>
                                     S/. {{item.producto.precio}}
                                 </td>
-                                <td>
+                                <td #total>
                                     S/. {{item.importe}}
+                                </td>
+                                <td class="t25 text-center">
+                                    <a (click)="eliminarProducto(item.id)" class="cursor">
+                                        <i class="mdi mdi-delete text-danger"></i>
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -49,10 +56,11 @@
                         <thead>
                             <th>N° Item</th>
                             <th>Curso</th>
-                            <th>Imagen</th>
-                            <th>Descripcion</th>
+                            <th>Duracion</th>
+                            <th>Horario</th>
                             <th>Precio Und.</th>
                             <th>Total</th>
+                            <th>Quitar</th>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of carritoC; let i = index">
@@ -63,15 +71,11 @@
                                     {{item.curso.nombre}}
                                 </td>
                                 <td>
-                                    <img *ngIf="item.curso?.foto"
-                                        src="http://localhost:8080/gym/uploads/imgcurso/{{item.curso.foto}}"
-                                        alt="{{item.producto.foto}}" class="rounded" width="30">
-                                    <img *ngIf="!item.curso?.foto"
-                                        src="http://localhost:8080/images/productos/notcourse.png" alt="sin foto"
-                                        class="rounded" width="30">
+                                    {{item.curso.fechaInicio | date:'dd / MM / yy'}} - {{item.curso.fechaFinal |
+                                    date:'dd / MM / yy'}}
                                 </td>
                                 <td>
-                                    {{item.curso.descripcion}}
+                                    {{item.curso.horaInicio}} - {{item.curso.horaFinal}}
                                 </td>
                                 <td>
                                     S/. {{item.curso.precio}}
@@ -79,11 +83,40 @@
                                 <td>
                                     S/. {{item.importe}}
                                 </td>
+                                <td class="t25 text-center">
+                                    <a (click)="eliminarCurso(item.id)" class="cursor">
+                                        <i class="mdi mdi-delete text-danger"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <table class="table v-middle no-border">
+                    <tbody>
+                        <tr>
+                            <td class="font-bold">SubTotal:</td>
+                            <td class="right">S/. {{subtotal}} </td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">Descuento:</td>
+                            <td class="right">S/. 0.00</td>
+                        </tr>
+                        <hr>
+                        <tr>
+                            <td class="font-bold">Total a pagar:</td>
+                            <td class="right">S/. {{subtotal}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" class="btn btn-primary" (click)="generarCompra()">Pagar</button>
             </div>
         </div>
     </div>

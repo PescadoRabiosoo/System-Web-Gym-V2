@@ -9,8 +9,10 @@
                     <div class="m-r-20 align-self-center"><img src="../assets/images/icon/income-w.png" alt="Income" />
                     </div>
                     <div class="align-self-center">
-                        <h6 class="text-white m-t-10 m-b-0">Total Income</h6>
-                        <h2 class="m-t-0 text-white">953,000</h2>
+                        <h6 class="text-white m-t-10 m-b-0"># Clientes Suscritos</h6>
+                        <h2 class="m-t-0 text-white">
+                            {{cantidadPlanes.planesvendidos}}
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -23,8 +25,10 @@
                     <div class="m-r-20 align-self-center"><img src="../assets/images/icon/expense-w.png" alt="Income" />
                     </div>
                     <div class="align-self-center">
-                        <h6 class="text-white m-t-10 m-b-0">Total Expense</h6>
-                        <h2 class="m-t-0 text-white">236,000</h2>
+                        <h6 class="text-white m-t-10 m-b-0"># Clientes Registrados</h6>
+                        <h2 class="m-t-0 text-white">
+                            {{clientesRegistrados.clientesregistrados}}
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -37,8 +41,10 @@
                     <div class="m-r-20 align-self-center"><img src="../assets/images/icon/assets-w.png" alt="Income" />
                     </div>
                     <div class="align-self-center">
-                        <h6 class="text-white m-t-10 m-b-0">Total Assets</h6>
-                        <h2 class="m-t-0 text-white">987,563</h2>
+                        <h6 class="text-white m-t-10 m-b-0"># Productos</h6>
+                        <h2 class="m-t-0 text-white">
+                            {{cantidadProductos.clientesregistrados}}
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -51,8 +57,10 @@
                     <div class="m-r-20 align-self-center"><img src="../assets/images/icon/staff-w.png" alt="Income" />
                     </div>
                     <div class="align-self-center">
-                        <h6 class="text-white m-t-10 m-b-0">Total Staff</h6>
-                        <h2 class="m-t-0 text-white">987,563</h2>
+                        <h6 class="text-white m-t-10 m-b-0"># Cursos</h6>
+                        <h2 class="m-t-0 text-white">
+                            {{cantidadCursos.clientesregistrados}}
+                        </h2>
                     </div>
                 </div>
             </div>
@@ -63,38 +71,84 @@
 <!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
-<div class="row">
-    <!-- column -->
-    <div class="col-lg-6">
-        <app-dona></app-dona>
+
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+
+        <div class="alert text-center text-primary">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
+
     </div>
-    <!-- column -->
-    <!-- column -->
-    <div class="col-lg-6">
-        <app-dona></app-dona>
-    </div>
-    <!-- column -->
-    <!-- column -->
-    <div class="col-lg-6">
-        <app-dona></app-dona>
-    </div>
-    <!-- column -->
-    <!-- column -->
-    <div class="col-lg-6">
-        <app-dona></app-dona>
-    </div>
-    <!-- column -->
-    <!-- column -->
-    <div class="col-lg-6">
-        <app-dona></app-dona>
-    </div>
-    <!-- column -->
-    <!-- column -->
-    <div class="col-lg-6">
-        <app-dona></app-dona>
-    </div>
-    <!-- column -->
 </div>
+
+<div class="row" *ngIf="!cargando">
+    <!-- column -->
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row justify-content-between">
+                    <h3>Ganancias de Membresias</h3>
+                </div>
+                <app-bar [data]="membershipChartData"></app-bar>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!cargando">
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row justify-content-between">
+                    <h3>Ganancias de Productos x Mes y Tipo</h3>
+                    <div>
+                        <select #producto (change)="onChangeProducto($event.target.value)">
+                            <option value="total">Todo el año</option>
+                            <option value="agosto">Agosto</option>
+                            <option value="septiembre">Septiembre</option>
+                            <option value="octubre">Octubre</option>
+                            <option value="noviembre">Noviembre</option>
+                            <option value="diciembre">Diciembre</option>
+                        </select>
+                        <select #tipo (change)="onChangeTipo($event.target.value)">
+                            <option value="1">Proteinas</option>
+                            <option value="2">Equipos</option>
+                            <option value="3">Pesas</option>
+                        </select>
+                    </div>
+                </div>
+                <app-dona [data]="productChartData"></app-dona>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row justify-content-between">
+                    <h3>Ganancias de Cursos x Mes</h3>
+                    <select (change)="onChangeCurso($event.target.value)">
+                        <option value="total">Todo el año</option>
+                        <option value="septiembre">Septiembre</option>
+                        <option value="octubre">Octubre</option>
+                        <option value="noviembre">Noviembre</option>
+                        <option value="diciembre">Diciembre</option>
+                    </select>
+                </div>
+                <app-dona [data]="courseChartData" #cursos></app-dona>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
