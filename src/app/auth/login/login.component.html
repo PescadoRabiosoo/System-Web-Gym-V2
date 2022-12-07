@@ -1,39 +1,40 @@
-   <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <section id="wrapper">
-        <div class="login-register" style="background-image:url(./assets/images/background/login-register.jpg);">
-            <div class="login-box card">
-                <div class="card-body">
-                    <form class="form-horizontal form-material" [formGroup]="loginForm" (ngSubmit)="save($event)">
-                        <h3 class="box-title m-b-20">Sign In</h3>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<section id="wrapper">
+    <div class="login-register" style="background-image:url(./assets/images/background/login-register.jpg);">
+        <div class="login-box card">
+            <div class="card-body">
+                <form class="form-horizontal form-material" [formGroup]="loginForm" (ngSubmit)="save($event)">
+                    <h3 class="box-title m-b-20">Inicio de Sesión</h3>
 
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                    <input class="form-control" type="text" formControlName="correo" placeholder="Correo">
-                            </div>
-                            <div *ngIf="emailFieldIsValid" class="text-success">
-                                Looks good!
-                            </div>
-                            <div *ngIf="emailFieldIsInvalid" class="text-danger">
-                                <p *ngIf="emailField.hasError('required')">El campo es requerido</p>
-                                <p *ngIf="emailField.hasError('email')">El correo no es valido</p>
-                            </div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" formControlName="correo" placeholder="Correo">
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <input class="form-control" type="password" formControlName="clave" placeholder="Contraseña"> 
-                            </div>
-                            <div *ngIf="claveFieldIsValid" class="text-success">
-                                Looks good!
-                            </div>
-                            <div *ngIf="claveFieldIsInvalid" class="text-danger">
-                                El campo es requerido
-                            </div>
+                        <div *ngIf="emailFieldIsValid" class="text-success">
+                            Looks good!
                         </div>
+                        <div *ngIf="emailFieldIsInvalid" class="text-danger">
+                            <p *ngIf="emailField.hasError('required')">El campo es requerido</p>
+                            <p *ngIf="emailField.hasError('email')">El correo no es valido</p>
+                        </div>
+                    </div>
 
-                       <!--<div class="form-group row">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="password" formControlName="clave"
+                                placeholder="Contraseña">
+                        </div>
+                        <div *ngIf="claveFieldIsValid" class="text-success">
+                            Looks good!
+                        </div>
+                        <div *ngIf="claveFieldIsInvalid" class="text-danger">
+                            El campo es requerido
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group row">
                             <div class="col-md-12">
                                 <div class="checkbox checkbox-info pull-left p-t-0">
                                     <input id="checkbox-signup" type="checkbox" class="filled-in chk-col-light-blue">
@@ -41,19 +42,21 @@
                                 </div> <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i> Forgot pwd?</a> </div>
                         </div>-->
 
-                        <div class="form-group text-center">
-                            <div class="col-xs-12 p-b-20">
-                                <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Log In</button>
-                            </div>
+                    <div class="form-group text-center">
+                        <div class="col-xs-12 p-b-20">
+                            <button class="btn btn-block btn-lg btn-info btn-rounded" type="submit">Iniciar
+                                Sesión</button>
                         </div>
-                        <div class="form-group m-b-0">
-                            <div class="col-sm-12 text-center">
-                                Don't have an account? <a routerLink="/register" class="text-info m-l-5"><b>Sign Up</b></a>
-                            </div>
+                    </div>
+                    <div class="form-group m-b-0">
+                        <div class="col-sm-12 text-center">
+                            No tienes una cuenta? <a routerLink="/register"
+                                class="text-info m-l-5"><b>Registrarse</b></a>
                         </div>
-                    </form>
+                    </div>
+                </form>
 
-                    <!--<form class="form-horizontal" id="recoverform" action="index.html">
+                <!--<form class="form-horizontal" id="recoverform" action="index.html">
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 <h3>Recover Password</h3>
@@ -70,7 +73,7 @@
                             </div>
                         </div>
                     </form>-->
-                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>

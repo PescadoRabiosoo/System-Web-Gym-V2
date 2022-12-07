@@ -86,7 +86,7 @@ export class CarritoComprasComponent implements OnInit {
     let carrito = new Carrito();
     if (cantidad == 0) {
       this.subtotal -= item.importe;
-      return this.eliminarProducto(item.id)
+      return this.eliminarProducto(item)
     }
     if (cantidad > item.producto.stock) {
       this.carrito.map(data => {
@@ -126,19 +126,21 @@ export class CarritoComprasComponent implements OnInit {
     }
   }
 
-  eliminarProducto(id: number): void {
-    console.log(id)
-    this.carritoService.eliminarItem(id).subscribe(data => {
+  eliminarProducto(itemP: ItemComprobanteProducto): void {
+    console.log(itemP.id)
+    this.carritoService.eliminarItem(itemP.id).subscribe(data => {
       console.log(data)
-      this.carrito = this.carrito.filter((item: ItemComprobanteProducto) => id !== item.id);
+      this.carrito = this.carrito.filter((item: ItemComprobanteProducto) => itemP.id !== item.id);
+      this.subtotal -= itemP.importe;
       return this.carrito;
     });
   }
 
-  eliminarCurso(id: number): void {
-    this.carritoService.eliminarItem(id).subscribe(data => {
+  eliminarCurso(itemC: ItemComprobanteCurso): void {
+    this.carritoService.eliminarItem(itemC.id).subscribe(data => {
       console.log(data)
-      this.carritoC = this.carritoC.filter((item: ItemComprobanteCurso) => id != item.id);
+      this.carritoC = this.carritoC.filter((item: ItemComprobanteCurso) => itemC.id != item.id);
+      this.subtotal -= itemC.importe;
       return this.carritoC;
     })
   }
